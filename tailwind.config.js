@@ -15,8 +15,16 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            backgroundImage: {
+                'landing-page': "url('/images/background-hd.jpeg')",
+                'logo-image': "url('/images/indobeach-logo.png')",
+            },
         },
     },
-
-    plugins: [forms],
+    plugins: [
+        require('daisyui'),
+    ],
+    daisyui: {
+        themes: ["light", "dark"],
+    },
 };
