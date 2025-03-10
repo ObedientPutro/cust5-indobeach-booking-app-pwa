@@ -1,7 +1,7 @@
 <script setup>
 import CustomerLayout from '@/Layouts/PageLayout.vue';
-import BackgroundImageDesktop from "@/Components/BackgroundImageDesktop.vue";
-import BackgroundImageMobile from "@/Components/BackgroundImageMobile.vue";
+import BackgroundImageDesktop from "@/Components/BackgroundImage/BackgroundImageDesktop.vue";
+import BackgroundImageMobile from "@/Components/BackgroundImage/BackgroundImageMobile.vue";
 import {Head} from "@inertiajs/vue3";
 
 defineOptions({

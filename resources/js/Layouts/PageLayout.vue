@@ -2,6 +2,21 @@
 import Navbar from "@/Components/Navbar.vue";
 import Footer from "@/Components/Footer.vue";
 import DrawerSide from "@/Components/DrawerSide.vue";
+import LoginForm from "@/Components/Form/LoginForm.vue";
+import Modal from "@/Components/Modal.vue";
+import { ref} from "vue";
+
+const showLoginModal = ref(false);
+const showRegisterModal = ref(false);
+
+const openLoginModal = () => {
+    showLoginModal.value = true;
+}
+
+const openRegisterModal = () => {
+    showRegisterModal.value = true;
+}
+
 </script>
 
 <template>
@@ -10,7 +25,7 @@ import DrawerSide from "@/Components/DrawerSide.vue";
             <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
             <div class="drawer-content flex flex-col">
                 <!-- Navbar -->
-                <Navbar />
+                <Navbar @open-login-modal="openLoginModal" />
 
                 <!-- Page content here -->
                 <div class="flex-grow">
@@ -25,6 +40,15 @@ import DrawerSide from "@/Components/DrawerSide.vue";
             <DrawerSide />
         </div>
     </div>
+
+    <!-- Modal Handler -->
+    <keep-alive>
+        <Modal :show="showLoginModal" @close="showLoginModal = false">
+            <template #default>
+                <LoginForm />
+            </template>
+        </Modal>
+    </keep-alive>
 </template>
 
 <style scoped>

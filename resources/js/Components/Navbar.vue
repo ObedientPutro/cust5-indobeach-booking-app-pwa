@@ -1,10 +1,5 @@
 <script setup>
-import { ref } from 'vue';
-import Modal from "@/Components/Modal.vue";
-import LoginForm from "@/Components/Form/LoginForm.vue";
-import LogoImageWhite from "@/Components/LogoImageWhite.vue";
-
-const isLoginModalOpen = ref(false);
+import LogoImageWhite from "@/Components/LogoImage/LogoImageWhite.vue";
 </script>
 
 <template>
@@ -42,7 +37,7 @@ const isLoginModalOpen = ref(false);
         <div class="hidden lg:flex">
             <!-- Menu Link Button -->
             <div class="flex">
-                <ul class="menu menu-horizontal px-1">
+                <ul class="menu menu-horizontal">
                     <li><a :href="route('home')" class="font-bold text-base text-white">Home</a></li>
                     <li><a class="font-bold text-base text-white">About</a></li>
                     <li><a class="font-bold text-base text-white">Gallery</a></li>
@@ -51,13 +46,14 @@ const isLoginModalOpen = ref(false);
                 </ul>
             </div>
 
+            <div class="divider divider-horizontal p-0 m-0 mx-2"></div>
+
             <!-- Button Right Side -->
-            <div class="flex">
+            <div class="flex mx-2">
                 <!-- Profile Button -->
                 <div class="hidden">
-                    <div class="divider divider-horizontal p-0 m-0"></div>
                     <div class="dropdown">
-                        <div tabindex="1" role="button" class="btn btn-outline font-bold text-base">
+                        <div tabindex="1" role="button" class="btn btn-outline hover:btn-info font-black text-white">
                             <font-awesome-icon icon="fa-solid fa-user" />
                             Johnson
                         </div>
@@ -73,27 +69,19 @@ const isLoginModalOpen = ref(false);
 
                 <!-- Authentication Button -->
                 <div class="flex">
-                    <a class="btn btn-outline hover:btn-info font-mono text-white"
-                       @click="isLoginModalOpen = true">
+                    <a class="btn btn-outline hover:btn-info font-mono text-white mr-4"
+                       @click="$emit('open-login-modal')">
                         <font-awesome-icon icon="fa-solid fa-user" />
                         Log In
                     </a>
-                    <div class="divider divider-horizontal p-0 m-0"></div>
-                    <a class="btn glass bg-blue-400 hover:bg-amber-400 font-mono font-black text-white">
+                    <a class="btn glass bg-blue-400 hover:bg-amber-400 font-mono font-black text-white"
+                        @click="$emit('open-register-modal')">
                         Register
                     </a>
                 </div>
             </div>
         </div>
     </div>
-
-    <keep-alive>
-        <Modal :show="isLoginModalOpen" @close="isLoginModalOpen = false">
-            <template #default>
-                <LoginForm />
-            </template>
-        </Modal>
-    </keep-alive>
 </template>
 
 <style scoped>
