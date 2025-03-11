@@ -11,7 +11,7 @@ class Post extends Model
     use HasFactory;
 
     protected $table = 'tb_m_posts';
-    
+
     protected $guard = ['id'];
 
     protected $casts = [
@@ -25,7 +25,7 @@ class Post extends Model
 
     public function images()
     {
-        return $this->hasMany(Image::class, 'post_id');
+        return $this->hasMany(PostImage::class, 'post_id');
     }
 
     public function amenities()

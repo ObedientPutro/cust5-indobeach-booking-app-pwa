@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('tb_tr_post_amenities', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-
             $table->foreignId('post_id')
                 ->references('id')
                 ->on('tb_m_posts')
@@ -26,6 +24,7 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->unique(['post_id', 'amenity_id']);
+            $table->timestamps();
         });
     }
 

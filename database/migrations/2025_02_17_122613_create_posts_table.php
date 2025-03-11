@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('tb_m_posts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id')
+                ->references('id')
+                ->on('tb_m_categories')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->string('title');
             $table->string('description');
             $table->decimal('price');
@@ -20,12 +25,6 @@ return new class extends Migration
             $table->integer('quantity_left');
             $table->string('status');
             $table->timestamps();
-
-            $table->foreignId('category_id')
-                ->references('id')
-                ->on('tb_m_categories')
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
         });
     }
 
