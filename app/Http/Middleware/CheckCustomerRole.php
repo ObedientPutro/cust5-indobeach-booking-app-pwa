@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckOwnerRole
+class CheckCustomerRole
 {
     /**
      * Handle an incoming request.
@@ -18,7 +18,7 @@ class CheckOwnerRole
     {
         $user = $request->user();
 
-        if (!$user || $user->role !== UserRole::Owner) {
+        if (!$user || $user->role !== UserRole::Customer) {
             abort(403, 'Unauthorized');
         }
 
