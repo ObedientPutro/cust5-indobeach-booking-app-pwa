@@ -15,12 +15,12 @@ class CategorySeeder extends Seeder
     {
         Category::create([
             "name" => "Cottage",
-            "description" => "Charming beachfront cottage with ocean views, cozy interiors, and direct access to sandy shores—perfect for serene seaside escapes."
+            "icon_path" => "Charming beachfront cottage with ocean views, cozy interiors, and direct access to sandy shores—perfect for serene seaside escapes."
         ]);
 
         Category::create([
             "name" => "Staycation",
-            "description" => "Relaxing staycation in a cozy beach cottage—ocean breezes, stunning sunsets, and tranquil vibes just steps from the shore."
+            "icon_path" => "Relaxing staycation in a cozy beach cottage—ocean breezes, stunning sunsets, and tranquil vibes just steps from the shore."
         ]);
     }
 }

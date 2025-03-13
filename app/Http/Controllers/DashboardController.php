@@ -8,7 +8,7 @@ use Inertia\Inertia;
 class DashboardController extends Controller
 {
     public function index() {
-        return Inertia::render('Dasboard', [
+        return Inertia::render('Dashboard', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
         ]);

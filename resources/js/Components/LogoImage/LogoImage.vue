@@ -1,3 +1,3 @@
 <template>
-    <img src="/images/indobeach-logo.png" />
+    <img src="/storage/images/indobeach-logo.png" />
 </template>
