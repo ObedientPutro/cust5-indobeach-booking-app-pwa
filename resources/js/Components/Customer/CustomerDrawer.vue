@@ -76,16 +76,6 @@ onUnmounted(() => {
                     Kontak
                 </NavLink>
             </li>
-<!--            <li>-->
-<!--                <NavLink :href="route('search')" :active="isRouteActive === route('search', {}, false)">-->
-<!--                    Pencarian-->
-<!--                </NavLink>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <NavLink :href="route('product')" :active="isRouteActive === route('product', {}, false)">-->
-<!--                    Produk-->
-<!--                </NavLink>-->
-<!--            </li>-->
             <div class="divider divider-vertical"></div>
             <li class="pt-2">
                 <div>

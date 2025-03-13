@@ -39,16 +39,6 @@ Route::middleware('guest')->group(function () {
     Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.store');
 });
 
-// Customer access
-Route::middleware(['auth', 'customer', 'verified'])->group(function () {
-
-});
-
-// Owner access
-Route::middleware(['auth', 'owner'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-});
-
 // Customer and owner access
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -59,4 +49,14 @@ Route::middleware('auth')->group(function () {
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+});
+
+// Customer access
+Route::middleware(['auth', 'customer', 'verified'])->group(function () {
+
+});
+
+// Owner access
+Route::middleware(['auth', 'owner'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 });

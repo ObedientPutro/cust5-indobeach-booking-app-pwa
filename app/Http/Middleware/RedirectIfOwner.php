@@ -21,14 +21,12 @@ class RedirectIfOwner
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                $user = Auth::guard($guard)->user();
+            if (!Auth::guard($guard)->check()) break;
 
-                return match ($user->role) {
-                    UserRole::Owner => redirect()->route('admin.dashboard'),
-                    default => redirect()->route('home'),
-                };
-            }
+            $user = Auth::guard($guard)->user();
+            if ($user->role !== UserRole::Owner) break;
+
+            redirect()->route('admin.dashboard');
         }
 
         return $next($request);

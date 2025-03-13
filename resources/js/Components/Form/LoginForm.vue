@@ -1,6 +1,6 @@
 <script setup>
-import { Head, Link, useForm } from '@inertiajs/vue3';
-import Checkbox from "@/Components/Backup/Checkbox.vue";
+import { useForm } from '@inertiajs/vue3';
+import {inject} from "vue";
 
 defineProps({
     canResetPassword: {
@@ -11,6 +11,9 @@ defineProps({
     },
 });
 
+const canCloseModal = inject('canCloseModal');
+const emit = defineEmits(['close-modal']);
+
 // Create a reactive form object
 const form = useForm({
     email: '',
@@ -18,9 +21,21 @@ const form = useForm({
     remember: false,
 });
 
+const closeModal = () => {
+    emit('close-modal');
+};
+
 const submit = () => {
+    canCloseModal(false);
     form.post(route('login'), {
-        onFinish: () => form.reset('password'),
+        onSuccess: () => {
+            form.reset();
+        },
+        onFinish: () => {
+            form.reset('password');
+            canCloseModal(true);
+            closeModal();
+        }
     });
 };
 </script>

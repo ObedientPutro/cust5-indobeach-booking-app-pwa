@@ -1,13 +1,15 @@
 <script setup>
 import NavLink from "@/Components/NavLink.vue";
 import LogoImageWhite from "@/Components/LogoImage/LogoImageWhite.vue";
+import LogoImage from "@/Components/LogoImage/LogoImage.vue";
 import { ref, onMounted, onUnmounted, watch, computed } from 'vue';
 import { usePage } from '@inertiajs/vue3';
-import LogoImage from "@/Components/LogoImage/LogoImage.vue";
+
+const page = usePage();
 
 const activeSection = ref(null);
 const isRouteActive = ref(null);
-const page = usePage();
+const user = computed(() => page.props.auth.user);
 
 const appName = import.meta.env.VITE_APP_NAME;
 
@@ -172,39 +174,55 @@ onUnmounted(() => {
 
                 <div class="divider divider-horizontal p-0 m-0 mx-2"></div>
 
-                <!-- Button Right Side -->
+                <!-- Right Button -->
                 <div class="flex mx-2">
-                    <!-- Profile Button -->
-                    <div class="hidden">
+                    <template v-if="user">
+                        <!-- Autenticated Button -->
                         <div class="dropdown">
-                            <div tabindex="1" role="button" class="btn btn-outline hover:btn-info font-black text-white">
+                            <div tabindex="1" role="button" :class="`btn btn-outline hover:btn-info font-black ${navbarButtonClass} capitalize`">
                                 <font-awesome-icon icon="fa-solid fa-user" />
-                                Johnson
+                                <div :class="navbarButtonTextClass">
+                                    {{ (user.name).split(" ")[0] }}
+                                </div>
                             </div>
                             <ul tabindex="1"
-                                class="menu menu-sm dropdown-content rounded-box z-[1] mt-3 w-40 p-2 bg-white">
-                                <li><a class="font-bold">Profile</a></li>
-                                <li><a class="font-bold">Booking Histories</a></li>
+                                class="menu menu-sm dropdown-content rounded-box z-[1] mt-3 w-40 p-2 bg-base-100 shadow-lg">
+                                <li>
+                                    <NavLink :href="route('profile.edit')">
+                                        Profile
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink href="#">
+                                        Booking Histories
+                                    </NavLink>
+                                </li>
                                 <div class="divider divider-vertical p-0 m-0"></div>
-                                <li><a class="font-bold">Logout</a></li>
+                                <li>
+                                    <NavLink :href="route('logout')" method="post">
+                                        Logout
+                                    </NavLink>
+                                </li>
                             </ul>
                         </div>
-                    </div>
+                    </template>
 
-                    <!-- Authentication Button -->
-                    <div class="flex">
-                        <a :class="`btn btn-outline hover:btn-info font-mono mr-4 ${navbarButtonClass}`"
-                           @click="$emit('open-login-modal')">
-                            <font-awesome-icon icon="fa-solid fa-user" />
-                            <div :class="navbarButtonTextClass">
-                                Log In
-                            </div>
-                        </a>
-                        <a class="btn glass bg-blue-400 hover:bg-amber-400 font-mono font-black text-white"
-                           @click="$emit('open-register-modal')">
-                            Register
-                        </a>
-                    </div>
+                    <template v-else>
+                        <!-- Login & Register Button -->
+                        <div class="flex">
+                            <a :class="`btn btn-outline hover:btn-info font-mono mr-4 ${navbarButtonClass}`"
+                               @click="$emit('open-login-modal')">
+                                <font-awesome-icon icon="fa-solid fa-user" />
+                                <div :class="navbarButtonTextClass">
+                                    Log In
+                                </div>
+                            </a>
+                            <a class="btn glass bg-blue-400 hover:bg-amber-400 font-mono font-black text-white"
+                               @click="$emit('open-register-modal')">
+                                Register
+                            </a>
+                        </div>
+                    </template>
                 </div>
             </ul>
 

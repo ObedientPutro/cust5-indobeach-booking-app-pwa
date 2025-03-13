@@ -1,7 +1,6 @@
 <script setup>
 import InputError from '@/Components/Backup/InputError.vue';
 import InputLabel from '@/Components/Backup/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/Backup/TextInput.vue';
 import { Link, useForm, usePage } from '@inertiajs/vue3';
 
@@ -86,7 +85,7 @@ const form = useForm({
             </div>
 
             <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+                <button :disabled="form.processing">Save</button>
 
                 <Transition
                     enter-active-class="transition ease-in-out"

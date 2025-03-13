@@ -16,6 +16,7 @@ onMounted(() => {
 const showLoginModal = ref(false);
 const showRegisterModal = ref(false);
 const navbarTransparent = ref(false);
+const modalCloseable = ref(true);
 
 const openLoginModal = () => {
     showLoginModal.value = true;
@@ -25,11 +26,16 @@ const openRegisterModal = () => {
     showRegisterModal.value = true;
 }
 
+const canCloseModal = (state) => {
+    modalCloseable.value = state;
+}
+
 const toggleNavbar = (transparent) => {
     navbarTransparent.value = transparent;
 };
 
 provide('toggleNavbar', toggleNavbar);
+provide('canCloseModal', canCloseModal);
 </script>
 
 <template>
@@ -48,9 +54,9 @@ provide('toggleNavbar', toggleNavbar);
 
     <!-- Modal Handler -->
     <keep-alive>
-        <Modal :show="showLoginModal" @close="showLoginModal = false">
+        <Modal :show="showLoginModal" @close="showLoginModal=false" :closeable="modalCloseable">
             <template #default>
-                <LoginForm />
+                <LoginForm @close-modal="showLoginModal=false"/>
             </template>
         </Modal>
     </keep-alive>
