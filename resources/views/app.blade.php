@@ -6,7 +6,7 @@
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
-        <link rel="icon" href="/images/indobeach-logo-white.png">
+        <link rel="icon" href="/storage/images/indobeach-logo-white.png">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
