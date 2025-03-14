@@ -20,7 +20,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
             $table->string('title');
             $table->string('description');
-            $table->decimal('price');
+            $table->unsignedBigInteger('price');
             $table->integer('quantity');
             $table->integer('quantity_left');
             $table->string('status');

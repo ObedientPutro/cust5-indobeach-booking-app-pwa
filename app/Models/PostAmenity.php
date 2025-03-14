@@ -9,7 +9,7 @@ class PostAmenity extends Model
 {
     use HasFactory;
 
-    protected $table = 'tb_tr_bookings';
+    protected $table = 'tb_tr_post_amenities';
 
     protected $fillable = [
         'post_id',
