@@ -33,7 +33,7 @@ const appName = import.meta.env.VITE_APP_NAME;
                     </SidebarLink>
                 </li>
                 <li>
-                    <SidebarLink :href="route('admin.post.index')" :active="route().current('admin.post.index')">
+                    <SidebarLink :href="route('admin.post.index')" :active="route().current('admin.post.*')">
                         <template #icon>
                             <DevicePhoneMobileIcon class="icon" />
                         </template>
@@ -43,7 +43,7 @@ const appName = import.meta.env.VITE_APP_NAME;
                     </SidebarLink>
                 </li>
                 <li>
-                    <SidebarLink :href="route('admin.category.index')" :active="route().current('admin.category.index')">
+                    <SidebarLink :href="route('admin.category.index')" :active="route().current('admin.category.*')">
                         <template #icon>
                             <BookmarkIcon class="icon" />
                         </template>
@@ -53,7 +53,7 @@ const appName = import.meta.env.VITE_APP_NAME;
                     </SidebarLink>
                 </li>
                 <li>
-                    <SidebarLink :href="route('admin.amenity.index')" :active="route().current('admin.amenity.index')">
+                    <SidebarLink :href="route('admin.amenity.index')" :active="route().current('admin.amenity.*')">
                         <template #icon>
                             <ArchiveBoxIcon class="icon" />
                         </template>
@@ -63,7 +63,7 @@ const appName = import.meta.env.VITE_APP_NAME;
                     </SidebarLink>
                 </li>
                 <li>
-                    <SidebarLink :href="route('admin.booking-history.index')" :active="route().current('admin.booking-history.index')">
+                    <SidebarLink :href="route('admin.booking-history.index')" :active="route().current('admin.booking-history.*')">
                         <template #icon>
                             <DocumentIcon class="icon" />
                         </template>
@@ -76,7 +76,7 @@ const appName = import.meta.env.VITE_APP_NAME;
             <div class="divider divider-vertical w-4/5 mx-auto"></div>
             <ul class="menu p-0menu p-0">
                 <li>
-                    <SidebarLink :href="route('profile.edit')" :active="route().current('profile.edit')">
+                    <SidebarLink :href="route('profile.edit')" :active="route().current('profile.*')">
                         <template #icon>
                             <UserIcon class="icon" />
                         </template>
