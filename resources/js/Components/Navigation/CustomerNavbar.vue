@@ -1,7 +1,7 @@
 <script setup>
 import NavLink from "@/Components/NavLink.vue";
-import LogoImageWhite from "@/Components/LogoImage/LogoImageWhite.vue";
-import LogoImage from "@/Components/LogoImage/LogoImage.vue";
+import LogoImageWhite from "@/Components/Logo/LogoImageWhite.vue";
+import LogoImage from "@/Components/Logo/LogoImage.vue";
 import { ref, onMounted, onUnmounted, watch, computed } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 

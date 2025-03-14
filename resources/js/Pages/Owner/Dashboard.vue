@@ -1,6 +1,10 @@
 <script setup>
-import {Head} from "@inertiajs/vue3";
+import { Head } from "@inertiajs/vue3";
+import OwnerLayout from "@/Layouts/OwnerLayout.vue";
 
+defineOptions({
+    layout: OwnerLayout
+});
 </script>
 
 <template>

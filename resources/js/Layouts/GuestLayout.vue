@@ -1,6 +1,6 @@
 <script setup>
-import CustomerNavbar from "@/Components/Customer/CustomerNavbar.vue";
-import CustomerDrawer from "@/Components/Customer/CustomerDrawer.vue";
+import CustomerNavbar from "@/Components/Navigation/CustomerNavbar.vue";
+import CustomerDrawer from "@/Components/Drawer/CustomerDrawer.vue";
 import Footer from "@/Components/Footer.vue";
 import LoginForm from "@/Components/Form/LoginForm.vue";
 import Modal from "@/Components/Modal.vue";

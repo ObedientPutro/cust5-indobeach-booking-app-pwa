@@ -1,7 +1,7 @@
 <script setup>
 import GuestLayout from "@/Layouts/GuestLayout.vue";
-import BackgroundImageDesktop from "@/Components/BackgroundImage/BackgroundImageDesktop.vue";
-import BackgroundImageMobile from "@/Components/BackgroundImage/BackgroundImageMobile.vue";
+import BackgroundImageDesktop from "@/Components/Background/BackgroundImageDesktop.vue";
+import BackgroundImageMobile from "@/Components/Background/BackgroundImageMobile.vue";
 import {Head} from "@inertiajs/vue3";
 import {inject, onBeforeMount, onMounted, onUnmounted, ref} from "vue";
 

@@ -26,7 +26,7 @@ class RedirectIfOwner
             $user = Auth::guard($guard)->user();
             if ($user->role !== UserRole::Owner) break;
 
-            redirect()->route('admin.dashboard');
+            return redirect()->route('admin.dashboard');
         }
 
         return $next($request);
