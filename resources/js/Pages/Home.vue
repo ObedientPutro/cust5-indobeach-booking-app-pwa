@@ -12,18 +12,18 @@ import 'swiper/css/autoplay';
 import { EffectCoverflow, Autoplay } from 'swiper/modules';
 
 const images = [
-    '/storage/images/galleries/1.jpeg',
-    '/storage/images/galleries/2.jpeg',
-    '/storage/images/galleries/3.jpeg',
-    '/storage/images/galleries/4.jpeg',
-    '/storage/images/galleries/5.jpeg',
-    '/storage/images/galleries/6.jpeg',
-    '/storage/images/galleries/7.jpeg',
-    '/storage/images/galleries/8.jpeg',
-    '/storage/images/galleries/9.jpeg',
-    '/storage/images/galleries/10.jpeg',
-    '/storage/images/galleries/11.jpeg',
-    '/storage/images/galleries/12.jpeg',
+    '/storage/images/gallery/1.jpeg',
+    '/storage/images/gallery/2.jpeg',
+    '/storage/images/gallery/3.jpeg',
+    '/storage/images/gallery/4.jpeg',
+    '/storage/images/gallery/5.jpeg',
+    '/storage/images/gallery/6.jpeg',
+    '/storage/images/gallery/7.jpeg',
+    '/storage/images/gallery/8.jpeg',
+    '/storage/images/gallery/9.jpeg',
+    '/storage/images/gallery/10.jpeg',
+    '/storage/images/gallery/11.jpeg',
+    '/storage/images/gallery/12.jpeg',
 ];
 
 const toggleNavbar = inject('toggleNavbar');

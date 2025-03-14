@@ -11,5 +11,8 @@ class PostAmenity extends Model
 
     protected $table = 'tb_tr_bookings';
 
-    protected $guard = ['id'];
+    protected $fillable = [
+        'post_id',
+        'amenity_id',
+    ];
 }

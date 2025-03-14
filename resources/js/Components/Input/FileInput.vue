@@ -59,7 +59,7 @@ const preventDefault = (event) => {
             <div class="text-center">
                 <PhotoIcon class="mx-auto size-12 text-gray-300" />
                 <p class="mt-4 text-sm text-gray-600">Click to upload or drag and drop</p>
-                <p class="text-xs text-gray-500">PNG, JPG, JPEG up to 10MB</p>
+                <p class="text-xs text-gray-500">PNG up to 10MB</p>
             </div>
         </div>
 

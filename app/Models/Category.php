@@ -10,8 +10,11 @@ class Category extends Model
     use HasFactory;
 
     protected $table = 'tb_m_categories';
-    
-    protected $guard = ['id'];
+
+    protected $fillable = [
+        'name',
+        'icon_path'
+    ];
 
     public function posts()
     {

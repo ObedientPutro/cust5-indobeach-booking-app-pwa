@@ -12,7 +12,15 @@ class Post extends Model
 
     protected $table = 'tb_m_posts';
 
-    protected $guard = ['id'];
+    protected $fillable = [
+        'category_id',
+        'title',
+        'description',
+        'price',
+        'quantity',
+        'quantity_left',
+        'status',
+    ];
 
     protected $casts = [
         'status' => PostStatus::class,

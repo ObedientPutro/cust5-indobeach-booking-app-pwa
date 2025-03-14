@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Amenity;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,44 +14,56 @@ class AmenitySeeder extends Seeder
      */
     public function run(): void
     {
-        Amenity::create([
-            "name" => "bath",
-            "icon_path" => "images\icons\bathup.png"
+        Amenity::insert([
+            [
+                'name' => 'bath',
+                'icon_path' => 'images\icons\amenity\bathup.png',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'bed',
+                'icon_path' => 'images\icons\amenity\bed.png',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'chair',
+                'icon_path' => 'images\icons\amenity\chair.png',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'electricity',
+                'icon_path' => 'images\icons\amenity\electricity.png',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'grill',
+                'icon_path' => 'images\icons\amenity\grill.png',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'restaurant',
+                'icon_path' => 'images\icons\amenity\restaurant.png',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'table',
+                'icon_path' => 'images\icons\amenity\table.png',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'wifi',
+                'icon_path' => 'images\icons\amenity\wifi.png',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
         ]);
 
-        Amenity::create([
-            "name" => "bed",
-            "icon_path" => "images\icons\bed.png"
-        ]);
-
-        Amenity::create([
-            "name" => "chair",
-            "icon_path" => "images\icons\chair.png"
-        ]);
-
-        Amenity::create([
-            "name" => "electricity",
-            "icon_path" => "images\icons\electricity.png"
-        ]);
-
-        Amenity::create([
-            "name" => "grill",
-            "icon_path" => "images\icons\grill.png"
-        ]);
-
-        Amenity::create([
-            "name" => "restaurant",
-            "icon_path" => "images\icons\restaurant.png"
-        ]);
-
-        Amenity::create([
-            "name" => "table",
-            "icon_path" => "images\icons\table.png"
-        ]);
-
-        Amenity::create(attributes: [
-            "name" => "wifi",
-            "icon_path" => "images\icons\wifi.png"
-        ]);
     }
 }

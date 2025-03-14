@@ -11,7 +11,10 @@ class PostImage extends Model
 
     protected $table = 'tb_m_post_images';
 
-    protected $guard = ['id'];
+    protected $fillable = [
+        'post_id',
+        'image_path'
+    ];
 
     public function post()
     {

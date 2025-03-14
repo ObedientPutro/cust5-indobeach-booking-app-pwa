@@ -12,7 +12,12 @@ class Booking extends Model
 
     protected $table = 'tb_tr_bookings';
 
-    protected $guard = ['id'];
+    protected $fillable = [
+        'post_id',
+        'user_id',
+        'booking_date',
+        'status',
+    ];
 
     protected $casts = [
         'status' => BookingStatus::class,

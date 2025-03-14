@@ -15,24 +15,30 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            "name" => "indobeach owner",
-            "email" => "indobeach@gmail.com",
-            "password" => bcrypt("password"),
-            "role" => UserRole::Owner,
-            "phone_number" => "081343123232",
-            "birth_date" => Carbon::today(),
-            "address" => "Lalumpe, Kombi, Minahasa Regency, North Sulawesi",
+        User::insert([
+            [
+                "name" => "indobeach owner",
+                "email" => "indobeach@gmail.com",
+                "password" => bcrypt("password"),
+                "role" => UserRole::Owner,
+                "phone_number" => "081343123232",
+                "birth_date" => Carbon::today(),
+                "address" => "Lalumpe, Kombi, Minahasa Regency, North Sulawesi",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                "name" => "obedient putro",
+                "email" => "obedputro@gmail.com",
+                "password" => bcrypt("password"),
+                "role" => UserRole::Customer,
+                "phone_number" => "081343547590",
+                "birth_date" => "2003-01-18",
+                "address" => "Wawalintouan, Kec. Tondano Barat",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
         ]);
 
-        User::create([
-            "name" => "obedient putro",
-            "email" => "obedputro@gmail.com",
-            "password" => bcrypt("password"),
-            "role" => UserRole::Customer,
-            "phone_number" => "081343547590",
-            "birth_date" => "2003-01-18",
-            "address" => "Lalumpe, Kombi, Minahasa Regency, North Sulawesi",
-        ]);
     }
 }

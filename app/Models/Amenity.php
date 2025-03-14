@@ -11,7 +11,10 @@ class Amenity extends Model
 
     protected $table = 'tb_m_amenities';
 
-    protected $guard = ['id'];
+    protected $fillable = [
+        'name',
+        'icon_path'
+    ];
 
     public function posts()
     {
