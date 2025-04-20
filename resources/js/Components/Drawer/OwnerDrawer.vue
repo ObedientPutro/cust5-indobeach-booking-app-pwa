@@ -38,7 +38,7 @@ const appName = import.meta.env.VITE_APP_NAME;
                             <DevicePhoneMobileIcon class="icon" />
                         </template>
                         <template #menu>
-                            Post
+                            Posts
                         </template>
                     </SidebarLink>
                 </li>
@@ -48,7 +48,7 @@ const appName = import.meta.env.VITE_APP_NAME;
                             <BookmarkIcon class="icon" />
                         </template>
                         <template #menu>
-                            Category
+                            Categories
                         </template>
                     </SidebarLink>
                 </li>
@@ -58,17 +58,17 @@ const appName = import.meta.env.VITE_APP_NAME;
                             <ArchiveBoxIcon class="icon" />
                         </template>
                         <template #menu>
-                            Amenity
+                            Amenities
                         </template>
                     </SidebarLink>
                 </li>
                 <li>
-                    <SidebarLink :href="route('admin.booking-history.index')" :active="route().current('admin.booking-history.*')">
+                    <SidebarLink :href="route('admin.booking.index')" :active="route().current('admin.booking.*')">
                         <template #icon>
                             <DocumentIcon class="icon" />
                         </template>
                         <template #menu>
-                            Booking History
+                            Bookings
                         </template>
                     </SidebarLink>
                 </li>

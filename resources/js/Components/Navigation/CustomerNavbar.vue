@@ -1,9 +1,15 @@
 <script setup>
 import NavLink from "@/Components/NavLink.vue";
+import SidebarLink from "@/Components/SidebarLink.vue";
 import LogoImageWhite from "@/Components/Logo/LogoImageWhite.vue";
 import LogoImage from "@/Components/Logo/LogoImage.vue";
 import { ref, onMounted, onUnmounted, watch, computed } from 'vue';
 import { usePage } from '@inertiajs/vue3';
+import {
+    UserIcon ,
+    ArrowLeftCircleIcon,
+    BookmarkIcon,
+} from "@heroicons/vue/24/solid";
 
 const page = usePage();
 
@@ -160,17 +166,14 @@ onUnmounted(() => {
                 </li>
                 <li>
                     <NavLink
-                        href="#"
+                        :href="route('gazebo')"
+                        :active="route().current('gazebo.*')"
                         :transparent="transparent"
                     >
                         Gazebo
                     </NavLink>
                 </li>
-<!--                <li>-->
-<!--                    <NavLink :href="route('product')" :active="isRouteActive === route('product', {}, false)">-->
-<!--                        Produk-->
-<!--                    </NavLink>-->
-<!--                </li>-->
+
 
                 <div class="divider divider-horizontal p-0 m-0 mx-2"></div>
 
@@ -180,7 +183,7 @@ onUnmounted(() => {
                         <!-- Autenticated Button -->
                         <div class="dropdown">
                             <div tabindex="1" role="button" :class="`btn btn-outline hover:btn-info font-black ${navbarButtonClass} capitalize`">
-                                <font-awesome-icon icon="fa-solid fa-user" />
+                                <UserIcon class="size-5" />
                                 <div :class="navbarButtonTextClass">
                                     {{ (user.name).split(" ")[0] }}
                                 </div>
@@ -188,20 +191,35 @@ onUnmounted(() => {
                             <ul tabindex="1"
                                 class="menu menu-sm dropdown-content rounded-box z-[1] mt-3 w-40 p-2 bg-base-100 shadow-lg">
                                 <li>
-                                    <NavLink :href="route('profile.edit')">
-                                        Profile
-                                    </NavLink>
+                                    <SidebarLink :href="route('profile.edit')" :icon="false">
+                                        <template #icon>
+                                            <UserIcon class="icon" />
+                                        </template>
+                                        <template #menu>
+                                            Profile
+                                        </template>
+                                    </SidebarLink>
                                 </li>
                                 <li>
-                                    <NavLink href="#">
-                                        Booking Histories
-                                    </NavLink>
+                                    <SidebarLink href="#">
+                                        <template #icon>
+                                            <BookmarkIcon class="icon" />
+                                        </template>
+                                        <template #menu>
+                                            Bookings
+                                        </template>
+                                    </SidebarLink>
                                 </li>
                                 <div class="divider divider-vertical p-0 m-0"></div>
                                 <li>
-                                    <NavLink :href="route('logout')" method="post">
-                                        Logout
-                                    </NavLink>
+                                    <SidebarLink :href="route('logout')" method="post">
+                                        <template #icon>
+                                            <ArrowLeftCircleIcon />
+                                        </template>
+                                        <template #menu>
+                                            Logout
+                                        </template>
+                                    </SidebarLink>
                                 </li>
                             </ul>
                         </div>
@@ -212,7 +230,7 @@ onUnmounted(() => {
                         <div class="flex">
                             <a :class="`btn btn-outline hover:btn-info font-mono mr-4 ${navbarButtonClass}`"
                                @click="$emit('open-login-modal')">
-                                <font-awesome-icon icon="fa-solid fa-user" />
+                                <UserIcon class="icon" />
                                 <div :class="navbarButtonTextClass">
                                     Log In
                                 </div>
@@ -231,5 +249,8 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+.icon {
+    @apply size-5;
+}
 
 </style>

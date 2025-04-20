@@ -52,7 +52,7 @@ const submitForm = () => {
 
     form.post(url, {
         forceFormData: true,
-        preserveState: false,
+        preserveState: true,
         onSuccess: () => {
             form.reset();
         },

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Owner;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class BookingHistoryController extends Controller
+class OwnerBookingController extends Controller
 {
     /**
      * Display a listing of the resource.

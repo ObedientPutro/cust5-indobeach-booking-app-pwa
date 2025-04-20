@@ -8,9 +8,8 @@ use Inertia\Inertia;
 class HomeController extends Controller
 {
     public function index() {
-        return Inertia::render('Home', [
-            'canLogin' => Route::has('login'),
-            'canRegister' => Route::has('register'),
-        ]);
+        
+
+        return Inertia::render('Home/Landing');
     }
 }

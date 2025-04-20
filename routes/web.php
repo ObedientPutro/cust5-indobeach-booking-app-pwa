@@ -6,13 +6,14 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\GazeboController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Owner\AmenityController;
-use App\Http\Controllers\Owner\BookingHistoryController;
 use App\Http\Controllers\Owner\CategoryController;
 use App\Http\Controllers\Owner\DashboardController;
+use App\Http\Controllers\Owner\OwnerBookingController;
 use App\Http\Controllers\Owner\PostController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Profile\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,24 +30,20 @@ use Illuminate\Support\Facades\Route;
 // Guest and costumer access
 Route::middleware('guest')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('gazebo', [GazeboController::class, 'index'])->name('gazebo');
+    Route::get('gazebo/{id}', [GazeboController::class, 'detail'])->name('gazebo.detail');
 
     Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
     Route::post('register', [RegisteredUserController::class, 'store']);
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
-
-    Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
-    Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
-
-    Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
-    Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.store');
 });
 
 // Customer and owner access
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])->name('password.confirm');
     Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
@@ -102,13 +99,13 @@ Route::middleware(['auth', 'owner'])->group(function () {
         'destroy' => 'admin.amenity.delete',
     ]);
 
-    Route::resource('/admin/booking-history', BookingHistoryController::class)->names([
-        'index'   => 'admin.booking-history.index',
-        'create'  => 'admin.booking-history.new',
-        'store'   => 'admin.booking-history.save',
-        'show'    => 'admin.booking-history.view',
-        'edit'    => 'admin.booking-history.modify',
-        'update'  => 'admin.booking-history.update',
-        'destroy' => 'admin.booking-history.delete',
+    Route::resource('/admin/booking', OwnerBookingController::class)->names([
+        'index'   => 'admin.booking.index',
+        'create'  => 'admin.booking.new',
+        'store'   => 'admin.booking.save',
+        'show'    => 'admin.booking.view',
+        'edit'    => 'admin.booking.modify',
+        'update'  => 'admin.booking.update',
+        'destroy' => 'admin.booking.delete',
     ]);
 });
