@@ -14,16 +14,11 @@ onMounted(() => {
 });
 
 const showLoginModal = ref(false);
-const showRegisterModal = ref(false);
 const navbarTransparent = ref(false);
 const modalCloseable = ref(true);
 
 const openLoginModal = () => {
     showLoginModal.value = true;
-}
-
-const openRegisterModal = () => {
-    showRegisterModal.value = true;
 }
 
 const canCloseModal = (state) => {
@@ -44,7 +39,7 @@ provide('canCloseModal', canCloseModal);
         <div class="drawer-content flex flex-col">
             <CustomerNavbar @open-login-modal="openLoginModal" :transparent="navbarTransparent" />
 
-            <div class="min-h-screen">
+            <div class="min-h-screen bg-white mt-20">
                 <slot />
             </div>
         </div>

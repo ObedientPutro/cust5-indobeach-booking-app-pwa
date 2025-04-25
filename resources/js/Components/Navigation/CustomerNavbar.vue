@@ -3,7 +3,7 @@ import NavLink from "@/Components/NavLink.vue";
 import SidebarLink from "@/Components/SidebarLink.vue";
 import LogoImageWhite from "@/Components/Logo/LogoImageWhite.vue";
 import LogoImage from "@/Components/Logo/LogoImage.vue";
-import { ref, onMounted, onUnmounted, watch, computed } from 'vue';
+import { computed } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import {
     UserIcon ,
@@ -13,8 +13,6 @@ import {
 
 const page = usePage();
 
-const activeSection = ref(null);
-const isRouteActive = ref(null);
 const user = computed(() => page.props.auth.user);
 
 const appName = import.meta.env.VITE_APP_NAME;
@@ -25,31 +23,6 @@ const props = defineProps({
         default: false,
     }
 });
-
-// Function to update active section based on scroll position
-const updateActiveSection = () => {
-    const sections = ['#home', '#gallery', '#about', '#contact'];
-
-    for (const section of sections) {
-        const el = document.querySelector(section);
-        if (el) {
-            isRouteActive.value = null;
-            const rect = el.getBoundingClientRect();
-            if (rect.top <= 150 && rect.bottom >= 150) {
-                activeSection.value = section;
-                break;
-            }
-        }
-    }
-};
-
-const updateIsRouteActive = () => {
-    const routePaths = [
-        route('home', {}, false),
-        route('login', {}, false),
-    ];
-    isRouteActive.value = routePaths.includes(page.url) ? page.url : null;
-}
 
 const navbarBgClass = computed(() => {
     return props.transparent
@@ -73,22 +46,6 @@ const navbarButtonTextClass = computed(() => {
     return props.transparent
         ? 'text-white'
         : 'text-black';
-});
-
-// Watch for page URL changes (for route-based links)
-watch(() => page.url, () => {
-    if (isRouteActive.value) {
-        activeSection.value = null;
-    }
-});
-
-onMounted(() => {
-    updateIsRouteActive();
-    window.addEventListener('scroll', updateActiveSection);
-});
-
-onUnmounted(() => {
-    window.removeEventListener('scroll', updateActiveSection);
 });
 </script>
 
@@ -131,7 +88,7 @@ onUnmounted(() => {
                 <li>
                     <NavLink
                         :href="route('home')"
-                        :active="(isRouteActive === route('home', {}, false)) || (!isRouteActive && activeSection === '#home')"
+                        :active="route().current('home')"
                         :transparent="transparent"
                     >
                         Home
@@ -139,35 +96,8 @@ onUnmounted(() => {
                 </li>
                 <li>
                     <NavLink
-                        :href="route('home') + '#gallery'"
-                        :active="!isRouteActive && activeSection === '#gallery'"
-                        :transparent="transparent"
-                    >
-                        Gallery
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        :href="route('home') + '#about'"
-                        :active="!isRouteActive && activeSection === '#about'"
-                        :transparent="transparent"
-                    >
-                        About
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        :href="route('home') + '#contact'"
-                        :active="!isRouteActive && activeSection === '#contact'"
-                        :transparent="transparent"
-                    >
-                        Contact
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
                         :href="route('gazebo')"
-                        :active="route().current('gazebo.*')"
+                        :active="route().current('gazebo')"
                         :transparent="transparent"
                     >
                         Gazebo
@@ -252,5 +182,4 @@ onUnmounted(() => {
 .icon {
     @apply size-5;
 }
-
 </style>

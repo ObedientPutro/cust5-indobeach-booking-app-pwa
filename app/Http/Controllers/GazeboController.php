@@ -12,12 +12,14 @@ class GazeboController extends Controller
     public function index() {
         $posts = Post::where('status', PostStatus::Published)->latest('created_at')->with(['images', 'category', 'amenities'])->paginate(10);
 
-        return Inertia::render('Gazebo/GazeboList', [
+        return Inertia::render('Gazebo/List/GazeboList', [
             'posts' => $posts,
         ]);
     }
 
-    public function detail(string $id) {
-        return Inertia::render('Gazebo/GazeboDetail');
+    public function detail(Post $post) {
+        return Inertia::render('Gazebo/Detail/GazeboDetail', [
+            'post' => $post->load(['images', 'category', 'amenities']),
+        ]);
     }
 }

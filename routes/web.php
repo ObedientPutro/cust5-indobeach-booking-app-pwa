@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('guest')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('gazebo', [GazeboController::class, 'index'])->name('gazebo');
-    Route::get('gazebo/{id}', [GazeboController::class, 'detail'])->name('gazebo.detail');
+    Route::get('gazebo/{post}', [GazeboController::class, 'detail'])->name('gazebo.detail');
 
     Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
     Route::post('register', [RegisteredUserController::class, 'store']);
