@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Customer\CustomerBookingController;
 use App\Http\Controllers\GazeboController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Owner\AmenityController;
@@ -53,8 +54,9 @@ Route::middleware('auth')->group(function () {
 });
 
 // Customer access
-Route::middleware(['auth', 'customer', 'verified'])->group(function () {
-
+Route::middleware(['auth', 'customer'])->group(function () {
+    Route::get('booking/{post}', [CustomerBookingController::class, 'createBooking'])->name('booking.create');
+    Route::post('booking/{post}', [CustomerBookingController::class, 'storeBooking'])->name('booking.store');
 });
 
 // Owner access

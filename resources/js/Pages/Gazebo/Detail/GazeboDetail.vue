@@ -76,9 +76,10 @@ function openWhatsApp() {
                 </div>
                 <div>
                     <p class="text-sm text-gray-600 mb-1">Available: {{ post.quantity_left }} / {{ post.quantity }}</p>
-                    <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-all duration-200">
+                    <a :href="route('booking.create', post.id)"
+                        class="cursor-pointer btn bg-blue-600 text-white px-6 rounded-lg hover:bg-blue-700 transition-all duration-200">
                         Book Now
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>

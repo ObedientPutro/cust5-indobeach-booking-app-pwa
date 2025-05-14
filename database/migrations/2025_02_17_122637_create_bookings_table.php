@@ -23,7 +23,9 @@ return new class extends Migration
                 ->on('tb_m_users')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->date('booking_date');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->unsignedBigInteger('total_price');
             $table->string('status');
             $table->timestamps();
         });
