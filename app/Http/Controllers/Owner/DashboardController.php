@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Owner;
 
+use App\Enums\BookingStatus;
 use App\Http\Controllers\Controller;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -13,8 +15,18 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Owner/Dashboard', [
+        $statuses = [
+            BookingStatus::WaitingApproval,
+            BookingStatus::WaitingPaymentConfirmation,
+            BookingStatus::WaitingCancelConfirmation,
+        ];
+        $bookings = Booking::whereIn('status', $statuses)
+            ->latest('updated_at')
+            ->with(['post', 'user'])
+            ->paginate(10);
 
+        return Inertia::render('Owner/Dashboard/Dashboard', [
+            'bookings' => $bookings,
         ]);
     }
 

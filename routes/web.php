@@ -61,15 +61,8 @@ Route::middleware(['auth', 'customer'])->group(function () {
 
 // Owner access
 Route::middleware(['auth', 'owner'])->group(function () {
-    Route::resource('/admin/dashboard', DashboardController::class)->names([
-        'index'   => 'admin.dashboard',
-        'create'  => 'admin.dashboard.new',
-        'store'   => 'admin.dashboard.save',
-        'show'    => 'admin.dashboard.view',
-        'edit'    => 'admin.dashboard.modify',
-        'update'  => 'admin.dashboard.update',
-        'destroy' => 'admin.dashboard.delete',
-    ]);
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+
 
     Route::resource('/admin/post', PostController::class)->names([
         'index'   => 'admin.post.index',

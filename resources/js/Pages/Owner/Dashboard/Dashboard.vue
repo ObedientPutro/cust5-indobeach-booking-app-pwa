@@ -5,14 +5,14 @@ import Pagination from "@/Components/Pagination.vue";
 import dayjs from "dayjs";
 import { defineProps, ref } from 'vue';
 import { Head, useForm } from '@inertiajs/vue3';
-import { EyeIcon } from "@heroicons/vue/24/solid";
+import {EyeIcon} from "@heroicons/vue/24/solid";
 
 defineOptions({
     layout: OwnerLayout
 });
 
 const props = defineProps({
-    posts: Object,
+    bookings: Object,
 });
 
 const deletePost = ref(null);
@@ -45,7 +45,7 @@ const formatDate = (dateString) => {
 </script>
 
 <template>
-    <Head title="Post" />
+    <Head title="Dashboard" />
 
     <div class="px-3">
         <div class="overflow-x-auto">
@@ -54,51 +54,39 @@ const formatDate = (dateString) => {
                 <thead class="text-center">
                 <tr>
                     <th>No.</th>
-                    <th>Name</th>
-                    <th>Category</th>
-                    <th>Price</th>
+                    <th>Customer</th>
+                    <th>Post</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
                     <th>Status</th>
-                    <th>Preview</th>
-                    <th>
-                        <div class="flex">
-                            <a class="btn btn-success btn-sm mx-auto" :href="route('admin.post.new')">Add</a>
-                        </div>
-                    </th>
+                    <th>Detail</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(post, index) in posts.data" :key="post.id">
-                    <td class="max-md:w-80">{{ index + posts.from }}</td>
-                    <td class="max-md:w-1/4">
-                        <div class="flex items-center gap-3">
-                            <div class="avatar">
-                                <div class="mask h-12 w-12">
-                                    <img
-                                        :src="`/storage/${post.images[0].image_path}`"
-                                        :alt="post.id" />
-                                </div>
-                            </div>
-                            <div>
-                                <div class="font-bold capitalize">{{ post.title }}</div>
-                                <div class="text-sm opacity-50">Created at {{ formatDate(post.created_at) }}</div>
-                            </div>
+                <tr v-for="(booking, index) in bookings.data" :key="booking.id">
+                    <td class="max-md:w-80">{{ index + bookings.from }}</td>
+                    <td class="text-center">
+                        <div class="capitalize">
+                            {{ booking.user.name }}
                         </div>
                     </td>
                     <td class="text-center">
                         <div class="capitalize">
-                            {{ post.category.name }}
+                            {{ booking.post.title }}
                         </div>
                     </td>
-                    <td class="text-center">{{ $formatRupiah(post.price) }}</td>
+                    <td class="text-center">{{ formatDate(booking.start_date) }}</td>
+                    <td class="text-center">{{ formatDate(booking.end_date) }}</td>
                     <td class="text-center">
                         <div class="capitalize">
-                            {{ post.status }}
+                            {{ booking.status }}
                         </div>
                     </td>
                     <td>
                         <div class="flex">
                             <a class="btn btn-info btn-sm mx-auto"
-                               :href="route('admin.post.view', post.id)"
+                               :href="route('admin.post.view', booking.id)"
                                target="_blank"
                             >
                                 <EyeIcon class="size-5 text-center text-white"/>
@@ -107,8 +95,8 @@ const formatDate = (dateString) => {
                     </td>
                     <td>
                         <div class="flex">
-                            <a :href="route('admin.post.modify', post.id)" class="btn btn-warning btn-sm ml-auto mr-1">Edit</a>
-                            <button @click="confirmDelete(post)" class="btn btn-error btn-sm mr-auto ml-1">Delete</button>
+                            <button @click="confirmDelete(booking)" class="btn btn-success btn-sm mr-auto ml-1 text-white">Accept</button>
+                            <button @click="confirmDelete(booking)" class="btn btn-error btn-sm mr-auto ml-1 text-white">Reject</button>
                         </div>
                     </td>
                 </tr>
@@ -117,7 +105,7 @@ const formatDate = (dateString) => {
         </div>
 
         <!-- Pagination -->
-        <Pagination :links="posts.links" />
+        <Pagination :links="bookings.links" />
     </div>
 
     <!-- Delete Confirmation Modal -->
@@ -132,3 +120,7 @@ const formatDate = (dateString) => {
         </div>
     </Modal>
 </template>
+
+<style scoped>
+
+</style>

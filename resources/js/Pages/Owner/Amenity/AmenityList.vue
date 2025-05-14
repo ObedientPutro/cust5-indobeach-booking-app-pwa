@@ -45,7 +45,7 @@ const formatDate = (dateString) => {
 </script>
 
 <template>
-    <Head title="Category" />
+    <Head title="Amenity" />
 
     <div class="px-3">
         <div class="overflow-x-auto">
