@@ -6,6 +6,10 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 
+// Splide Carousel
+import { Splide, SplideSlide } from '@splidejs/vue-splide';
+import '@splidejs/vue-splide/css';
+
 // Import Font Awesome core
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
@@ -28,6 +32,10 @@ createInertiaApp({
                 minimumFractionDigits: 0
             }).format(amount);
         };
+
+        app.component('Splide', Splide);
+        app.component('SplideSlide', SplideSlide);
+        app.component('FontAwesomeIcon', FontAwesomeIcon);
 
         return app.use(plugin).use(ZiggyVue).mount(el);
     },

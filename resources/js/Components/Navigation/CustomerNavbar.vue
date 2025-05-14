@@ -26,7 +26,7 @@ const props = defineProps({
 
 const navbarBgClass = computed(() => {
     return props.transparent
-        ? 'backdrop-blur-sm '
+        ? 'backdrop-blur-sm'
         : 'bg-white';
 });
 
@@ -97,7 +97,7 @@ const navbarButtonTextClass = computed(() => {
                 <li>
                     <NavLink
                         :href="route('gazebo')"
-                        :active="route().current('gazebo')"
+                        :active="route().current('gazebo.*')"
                         :transparent="transparent"
                     >
                         Gazebo
@@ -159,14 +159,14 @@ const navbarButtonTextClass = computed(() => {
                         <!-- Login & Register Button -->
                         <div class="flex">
                             <a :class="`btn btn-outline hover:btn-info font-mono mr-4 ${navbarButtonClass}`"
-                               @click="$emit('open-login-modal')">
+                               :href="route('login')">
                                 <UserIcon class="icon" />
                                 <div :class="navbarButtonTextClass">
                                     Log In
                                 </div>
                             </a>
                             <a class="btn glass bg-blue-400 hover:bg-amber-400 font-mono font-black text-white"
-                               @click="$emit('open-register-modal')">
+                               :href="route('register')">
                                 Register
                             </a>
                         </div>
