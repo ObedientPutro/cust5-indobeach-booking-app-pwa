@@ -1,5 +1,5 @@
 <script setup>
-import { useForm, router, usePage } from '@inertiajs/vue3'
+import { useForm, usePage } from '@inertiajs/vue3'
 import { defineOptions, computed } from 'vue'
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import InputLabel from "@/Components/Input/InputLabel.vue";

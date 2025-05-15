@@ -12,10 +12,22 @@ use Inertia\Inertia;
 
 class CustomerBookingController extends Controller
 {
+    public function bookingList() {
+        $bookings = Booking::where('user_id', auth()->user()->id)->with('post')->latest('created_at')->paginate(10);
+
+        return Inertia::render('Customer/Booking/BookingList', [
+            'bookings' => $bookings,
+        ]);
+    }
+
+    public function bookingDetail(Booking $booking) {
+
+    }
+
     public function createBooking(Post $post)
     {
         return Inertia::render('Customer/Booking/BookingForm', [
-            'post' => $post
+            'post' => $post,
         ]);
     }
 
@@ -57,11 +69,4 @@ class CustomerBookingController extends Controller
         return redirect()->route('gazebo.detail', $post->id)->with('success', 'Booking Success, Waiting for Approval');
     }
 
-    public function bookingList() {
-
-    }
-
-    public function bookingDetail(Booking $booking) {
-
-    }
 }

@@ -121,7 +121,7 @@ const navbarButtonTextClass = computed(() => {
                             <ul tabindex="1"
                                 class="menu menu-sm dropdown-content rounded-box z-[1] mt-3 w-40 p-2 bg-base-100 shadow-lg">
                                 <li>
-                                    <SidebarLink :href="route('profile.edit')" :icon="false">
+                                    <SidebarLink :href="route('profile.edit')">
                                         <template #icon>
                                             <UserIcon class="icon" />
                                         </template>
@@ -131,7 +131,7 @@ const navbarButtonTextClass = computed(() => {
                                     </SidebarLink>
                                 </li>
                                 <li>
-                                    <SidebarLink href="#">
+                                    <SidebarLink :href="route('booking')">
                                         <template #icon>
                                             <BookmarkIcon class="icon" />
                                         </template>
