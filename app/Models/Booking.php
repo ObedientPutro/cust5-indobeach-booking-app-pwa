@@ -18,6 +18,7 @@ class Booking extends Model
         'start_date',
         'end_date',
         'total_price',
+        'payment_image_path',
         'status',
     ];
 

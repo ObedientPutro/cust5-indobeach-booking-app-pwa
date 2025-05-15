@@ -5,13 +5,17 @@ namespace App\Http\Controllers\Customer;
 use App\Enums\BookingStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Booking\StoreBookingRequest;
+use App\Http\Requests\Booking\UploadPaymentBookingRequest;
 use App\Models\Booking;
 use App\Models\Post;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class CustomerBookingController extends Controller
 {
+    private string $image_path = 'images/payment';
+
     public function bookingList() {
         $bookings = Booking::where('user_id', auth()->user()->id)->with('post')->latest('created_at')->paginate(10);
 
@@ -21,7 +25,18 @@ class CustomerBookingController extends Controller
     }
 
     public function bookingDetail(Booking $booking) {
+        $booking->load('post', 'user');
 
+        if (auth()->user() != $booking->user) {
+            return back();
+        }
+
+        $isUploadPayment = $booking->status == BookingStatus::Payment;
+
+        return Inertia::render('Customer/Booking/BookingView', [
+            'booking' => $booking,
+            'isUploadPayment' => $isUploadPayment,
+        ]);
     }
 
     public function createBooking(Post $post)
@@ -67,6 +82,39 @@ class CustomerBookingController extends Controller
         ]);
 
         return redirect()->route('gazebo.detail', $post->id)->with('success', 'Booking Success, Waiting for Approval');
+    }
+
+    public function bookingPaymentForm(Booking $booking) {
+        $booking->load('post', 'user');
+
+        if (auth()->user() != $booking->user) return back();
+
+        if ($booking->status != BookingStatus::Payment) return back();
+
+        return Inertia::render('Customer/Booking/BookingPaymentForm', [
+            'booking' => $booking,
+        ]);
+    }
+
+    public function uploadBookingPayment(UploadPaymentBookingRequest $request, Booking $booking) {
+        $booking->load('post', 'user');
+
+        if (auth()->user() != $booking->user) return back();
+
+        if ($booking->status != BookingStatus::Payment) return back();
+
+        if ($booking->payment_image_path != null) {
+            Storage::disk('public')->delete($booking->payment_image_path);
+        }
+
+        $imageLinkPath = $request->file('image_path')->store($this->image_path, 'public');
+
+        $booking->update([
+            'payment_image_path' => $imageLinkPath,
+            'status' => BookingStatus::WaitingPaymentConfirmation,
+        ]);
+
+        return redirect()->route('booking.detail', $booking->id)->with('success', 'Payment Uploaded Successfully');
     }
 
 }

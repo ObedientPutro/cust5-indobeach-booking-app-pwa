@@ -61,6 +61,7 @@ const formatDate = (dateString) => {
                         <div class="flex">
                             <a class="btn btn-info btn-sm mx-auto"
                                :href="route('booking.detail', booking.id)"
+                               target="_blank"
                             >
                                 <EyeIcon class="size-5 text-center text-white"/>
                             </a>

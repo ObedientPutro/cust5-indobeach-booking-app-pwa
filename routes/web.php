@@ -60,6 +60,9 @@ Route::middleware(['auth', 'customer'])->group(function () {
 
     Route::get('booking-post/{post}', [CustomerBookingController::class, 'createBooking'])->name('booking.create');
     Route::post('booking-post/{post}', [CustomerBookingController::class, 'storeBooking'])->name('booking.store');
+
+    Route::get('booking-payment/{booking}', [CustomerBookingController::class, 'bookingPaymentForm'])->name('booking.payment');
+    Route::patch('booking-payment/{booking}', [CustomerBookingController::class, 'uploadBookingPayment'])->name('booking.upload-payment');
 });
 
 // Owner access

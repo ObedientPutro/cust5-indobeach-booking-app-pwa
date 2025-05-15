@@ -6,6 +6,7 @@ use App\Enums\BookingStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class OwnerBookingController extends Controller
 {
@@ -14,15 +15,23 @@ class OwnerBookingController extends Controller
      */
     public function index()
     {
-        //
+        $bookings = Booking::with('post', 'user')->latest('created_at')->paginate(10);
+
+        return Inertia::render('Owner/Booking/BookingList', [
+            'bookings' => $bookings,
+        ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Booking $booking)
     {
-        //
+        $booking->load('post', 'user');
+
+        return Inertia::render('Owner/Booking/BookingView', [
+            'booking' => $booking,
+        ]);
     }
 
     /**
