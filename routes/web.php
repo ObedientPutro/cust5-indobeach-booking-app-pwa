@@ -66,6 +66,10 @@ Route::middleware(['auth', 'customer'])->group(function () {
 Route::middleware(['auth', 'owner'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
+    Route::get('/admin/booking', [OwnerBookingController::class, 'index'])->name('admin.booking.index');
+    Route::get('/admin/booking/{booking}', [OwnerBookingController::class, 'show'])->name('admin.booking.view');
+    Route::patch('/admin/booking/accept/{booking}', [OwnerBookingController::class, 'acceptBooking'])->name('admin.booking.accept');
+    Route::patch('/admin/booking/reject/{booking}', [OwnerBookingController::class, 'rejectBooking'])->name('admin.booking.reject');
 
     Route::resource('/admin/post', PostController::class)->names([
         'index'   => 'admin.post.index',
@@ -97,13 +101,4 @@ Route::middleware(['auth', 'owner'])->group(function () {
         'destroy' => 'admin.amenity.delete',
     ]);
 
-    Route::resource('/admin/booking', OwnerBookingController::class)->names([
-        'index'   => 'admin.booking.index',
-        'create'  => 'admin.booking.new',
-        'store'   => 'admin.booking.save',
-        'show'    => 'admin.booking.view',
-        'edit'    => 'admin.booking.modify',
-        'update'  => 'admin.booking.update',
-        'destroy' => 'admin.booking.delete',
-    ]);
 });

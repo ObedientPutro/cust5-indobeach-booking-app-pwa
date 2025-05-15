@@ -15,28 +15,39 @@ const props = defineProps({
     bookings: Object,
 });
 
-const deletePost = ref(null);
-const deleteForm = useForm({});
+const rejectBooking = ref(null);
+const rejectForm = useForm({});
 const showModal = ref(false);
 
-const confirmDelete = (post) => {
-    deletePost.value = post;
+const confirmReject = (booking) => {
+    rejectBooking.value = booking;
     showModal.value = true;
 };
 
 const closeModal = () => {
     showModal.value = false;
-    deletePost.value = null;
+    rejectBooking.value = null;
 };
 
-const performDelete = () => {
-    if (deletePost.value) {
-        deleteForm.delete(route('admin.post.delete', deletePost.value.id), {
+const performReject = () => {
+    if (rejectBooking.value) {
+        rejectForm.post(route('admin.booking.reject', rejectBooking.value.id), {
             onSuccess: () => {
                 closeModal();
             },
+            headers: {
+                'X-HTTP-Method-Override': 'PATCH',
+            }
         });
     }
+};
+
+const performAccept = (booking) => {
+    rejectForm.post(route('admin.booking.accept', booking.id), {
+        headers: {
+            'X-HTTP-Method-Override': 'PATCH',
+        }
+    });
 };
 
 const formatDate = (dateString) => {
@@ -86,7 +97,7 @@ const formatDate = (dateString) => {
                     <td>
                         <div class="flex">
                             <a class="btn btn-info btn-sm mx-auto"
-                               :href="route('admin.post.view', booking.id)"
+                               :href="route('admin.booking.view', booking.id)"
                                target="_blank"
                             >
                                 <EyeIcon class="size-5 text-center text-white"/>
@@ -95,8 +106,8 @@ const formatDate = (dateString) => {
                     </td>
                     <td>
                         <div class="flex">
-                            <button @click="confirmDelete(booking)" class="btn btn-success btn-sm mr-auto ml-1 text-white">Accept</button>
-                            <button @click="confirmDelete(booking)" class="btn btn-error btn-sm mr-auto ml-1 text-white">Reject</button>
+                            <button @click="performAccept(booking)" class="btn btn-success btn-sm mr-auto ml-1 text-white">Accept</button>
+                            <button @click="confirmReject(booking)" class="btn btn-error btn-sm mr-auto ml-1 text-white">Reject</button>
                         </div>
                     </td>
                 </tr>
@@ -108,14 +119,14 @@ const formatDate = (dateString) => {
         <Pagination :links="bookings.links" />
     </div>
 
-    <!-- Delete Confirmation Modal -->
+    <!-- Reject Confirmation Modal -->
     <Modal :show="showModal" @close="closeModal">
         <div class="p-6">
-            <h3 class="text-lg font-bold">Confirm Deletion</h3>
-            <p class="py-4">Are you sure you want to delete <strong>{{ deletePost?.name }}</strong>?</p>
+            <h3 class="text-lg font-bold">Confirm Rejection</h3>
+            <p class="py-4">Are you sure you want to reject <strong>{{ rejectBooking?.user.name }}</strong>?</p>
             <div class="flex justify-end gap-3">
                 <button class="btn" @click="closeModal">Cancel</button>
-                <button class="btn btn-error" @click="performDelete">Delete</button>
+                <button class="btn btn-error" @click="performReject">Reject</button>
             </div>
         </div>
     </Modal>

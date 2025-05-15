@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Owner;
 
+use App\Enums\BookingStatus;
 use App\Http\Controllers\Controller;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 
 class OwnerBookingController extends Controller
@@ -16,22 +18,6 @@ class OwnerBookingController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(string $id)
@@ -40,26 +26,42 @@ class OwnerBookingController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Update the specified resource in storage.
      */
-    public function edit(string $id)
+    public function acceptBooking(Booking $booking)
     {
-        //
+        $booking->load('user');
+        switch ($booking->status) {
+            case BookingStatus::WaitingApproval:
+                $booking->update(['status' => BookingStatus::Payment]);
+                return back()->with('success', 'Booking from ' . $booking->user->name . ' Approved');
+            case BookingStatus::WaitingPaymentConfirmation:
+                $booking->update(['status' => BookingStatus::Confirmed]);
+                return back()->with('success', 'Payment from ' . $booking->user->name . ' Confirmed');
+            case BookingStatus::WaitingCancelConfirmation:
+                $booking->update(['status' => BookingStatus::Cancelled]);
+                return back()->with('success', 'Cancellation Request from ' . $booking->user->name . ' Accepted');
+        }
+        return back()->with('error', 'Something Wrong with Acception, Call Developer!');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function rejectBooking(Booking $booking)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $booking->load('user');
+        switch ($booking->status) {
+            case BookingStatus::WaitingApproval:
+                $booking->update(['status' => BookingStatus::Rejected]);
+                return back()->with('success', 'Booking from ' . $booking->user->name . ' Rejected');
+            case BookingStatus::WaitingPaymentConfirmation:
+                $booking->update(['status' => BookingStatus::Payment]);
+                return back()->with('success', 'Payment from ' . $booking->user->name . ' Rejected');
+            case BookingStatus::WaitingCancelConfirmation:
+                $booking->update(['status' => BookingStatus::Confirmed]);
+                return back()->with('success', 'Cancellation Request from ' . $booking->user->name . ' Rejected');
+        }
+        return back()->with('error', 'Something Wrong with Acception, Call Developer!');
     }
 }
