@@ -20,13 +20,20 @@ class DashboardController extends Controller
             BookingStatus::WaitingPaymentConfirmation,
             BookingStatus::WaitingCancelConfirmation,
         ];
+
         $bookings = Booking::whereIn('status', $statuses)
             ->latest('updated_at')
             ->with(['post', 'user'])
             ->paginate(10);
 
+        $reserved_bookings = Booking::where('status', BookingStatus::Confirmed)
+            ->latest('start_date')
+            ->with(['post', 'user'])
+            ->paginate(10);
+
         return Inertia::render('Owner/Dashboard/Dashboard', [
             'bookings' => $bookings,
+            'reserved_bookings' => $reserved_bookings,
         ]);
     }
 

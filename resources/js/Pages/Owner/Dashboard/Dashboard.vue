@@ -12,7 +12,14 @@ defineOptions({
 });
 
 const props = defineProps({
-    bookings: Object,
+    bookings: {
+        type: Object,
+        required: true,
+    },
+    reserved_bookings: {
+        type: Object,
+        required: true,
+    },
 });
 
 const rejectBooking = ref(null);
@@ -59,6 +66,7 @@ const formatDate = (dateString) => {
     <Head title="Dashboard" />
 
     <div class="px-3">
+        <h1 class="uppercase font-bold text-center py-3">Booking Request</h1>
         <div class="overflow-x-auto">
             <table class="table">
                 <!-- Table content remains unchanged -->
@@ -117,6 +125,55 @@ const formatDate = (dateString) => {
 
         <!-- Pagination -->
         <Pagination :links="bookings.links" />
+    </div>
+
+    <div class="px-3 mt-20">
+        <h1 class="uppercase font-bold text-center py-3">Post Reserved</h1>
+        <div class="overflow-x-auto">
+            <table class="table">
+                <!-- Table content remains unchanged -->
+                <thead class="text-center">
+                <tr>
+                    <th>No.</th>
+                    <th>Post</th>
+                    <th>Customer</th>
+                    <th>Phone Number</th>
+                    <th>Date</th>
+                    <th>Detail</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(booking, index) in reserved_bookings.data" :key="booking.id">
+                    <td class="max-md:w-80">{{ index + reserved_bookings.from }}</td>
+                    <td class="text-center">
+                        <div class="capitalize">
+                            {{ booking.post.title }}
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <div class="capitalize">
+                            {{ booking.user.name }}
+                        </div>
+                    </td>
+                    <td class="text-center">{{ booking.user.phone_number }}</td>
+                    <td class="text-center">{{ formatDate(booking.start_date) + " - " + formatDate(booking.end_date) }}</td>
+                    <td>
+                        <div class="flex">
+                            <a class="btn btn-info btn-sm mx-auto"
+                               :href="route('admin.booking.view', booking.id)"
+                               target="_blank"
+                            >
+                                <EyeIcon class="size-5 text-center text-white"/>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <Pagination :links="reserved_bookings.links" />
     </div>
 
     <!-- Reject Confirmation Modal -->
