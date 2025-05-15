@@ -6,6 +6,7 @@ import NavLink from "@/Components/NavLink.vue";
 const activeSection = ref(null);
 const isRouteActive = ref(null);
 const page = usePage();
+const user = computed(() => page.props.auth.user);
 
 // Function to update active section based on scroll position
 const updateActiveSection = () => {
@@ -57,37 +58,78 @@ onUnmounted(() => {
         <ul class="menu bg-base-200 min-h-full w-60 p-4">
             <!-- Sidebar content here -->
             <li>
-                <NavLink :href="route('home')" :active="(isRouteActive === route('home', {}, false)) || (!isRouteActive && activeSection === '#home')">
-                    Beranda
+                <NavLink
+                    :href="route('home')"
+                    :active="route().current('home')"
+                >
+                    Home
                 </NavLink>
             </li>
             <li>
-                <NavLink :href="route('home') + '#features'" :active="!isRouteActive && activeSection === '#features'">
-                    Fitur
-                </NavLink>
-            </li>
-            <li>
-                <NavLink :href="route('home') + '#about'" :active="!isRouteActive && activeSection === '#about'">
-                    Tentang
-                </NavLink>
-            </li>
-            <li>
-                <NavLink :href="route('home') + '#contact'" :active="!isRouteActive && activeSection === '#contact'">
-                    Kontak
+                <NavLink
+                    :href="route('gazebo.index')"
+                    :active="route().current('gazebo.*')"
+                >
+                    Gazebo
                 </NavLink>
             </li>
             <div class="divider divider-vertical"></div>
-            <li class="pt-2">
-                <div>
+            <li v-if="user" class="pt-2">
+                <div class="capitalize">
                     <font-awesome-icon icon="fa-solid fa-user" />
-                    Johnson
+                    {{ user.name }}
                 </div>
                 <ul class="p-2">
-                    <li><a class="font-bold">Profile</a></li>
-                    <li><a class="font-bold">Booking Histories</a></li>
-                    <li><a class="font-bold">Logout</a></li>
+                    <li>
+                        <div class="py-0 px-1">
+                            <NavLink
+                                :href="route('profile.edit')"
+                                :active="route().current('profile.*')"
+                            >
+                                Profile
+                            </NavLink>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="py-0 px-1">
+                            <NavLink
+                                :href="route('booking')"
+                                :active="route().current('booking')"
+                            >
+                                Booking History
+                            </NavLink>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="py-0 px-1">
+                            <NavLink
+                                :href="route('logout')"
+                                method="post"
+                            >
+                                Logout
+                            </NavLink>
+                        </div>
+                    </li>
                 </ul>
             </li>
+            <div v-else>
+                <li>
+                    <NavLink
+                        :href="route('login')"
+                        :active="route().current('login')"
+                    >
+                        Login
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink
+                        :href="route('register')"
+                        :active="route().current('register')"
+                    >
+                        Register
+                    </NavLink>
+                </li>
+            </div>
         </ul>
     </div>
 </template>

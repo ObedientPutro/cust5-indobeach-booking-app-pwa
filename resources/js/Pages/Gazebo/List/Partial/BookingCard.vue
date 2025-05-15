@@ -7,14 +7,14 @@ defineProps({
 </script>
 
 <template>
-    <div class="grid grid-cols-2 rounded-xl border border-b-gray-300 shadow-md overflow-hidden mb-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 rounded-xl border border-b-gray-300 shadow-md overflow-hidden mb-6 max-md:pb-5">
         <!-- Left Column (Image Carousel) -->
-        <div class="col-span-1 mt-auto mb-auto p-2">
+        <div class="mt-auto mb-auto p-2">
             <ImageCarousel :images="post.images" />
         </div>
 
         <!-- Right Column (Details) -->
-        <div class="col-span-1 mt-auto mb-auto pr-4 pl-4 justify-between">
+        <div class="mt-auto mb-auto pr-4 pl-4 justify-between">
             <!-- Row 1: Name + Category & Price -->
             <div class="flex justify-between items-center">
                 <div class="text-left pr-2">

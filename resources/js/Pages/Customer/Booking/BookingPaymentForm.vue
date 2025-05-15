@@ -47,7 +47,7 @@ const submitForm = () => {
 <template>
     <Head title="Category" />
 
-    <form @submit.prevent="submitForm" class="mx-32 mt-32">
+    <form @submit.prevent="submitForm" class="max-sm:mx-10 md:mx-32 mt-32">
         <div class="space-y-12">
             <div class="border-b border-gray-900/10 pb-12">
 
