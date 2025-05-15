@@ -11,6 +11,10 @@ const props = defineProps({
     post: {
         type: Object,
         required: true,
+    },
+    booking: {
+        type: Object,
+        required: false,
     }
 });
 
@@ -76,10 +80,18 @@ function openWhatsApp() {
                 </div>
                 <div>
                     <p class="text-sm text-gray-600 mb-1">Available: {{ post.quantity_left }} / {{ post.quantity }}</p>
-                    <a :href="route('booking.create', post.id)"
-                        class="cursor-pointer btn bg-blue-600 text-white px-6 rounded-lg hover:bg-blue-700 transition-all duration-200">
-                        Book Now
-                    </a>
+                    <div v-if="booking">
+                        <a :href="route('booking.detail', booking.id)"
+                           class="cursor-pointer btn btn-success text-white px-6 rounded-lg transition-all duration-200">
+                            See Booking Status
+                        </a>
+                    </div>
+                    <div v-else>
+                        <a :href="route('booking.create', post.id)"
+                           class="cursor-pointer btn bg-blue-600 text-white px-6 rounded-lg hover:bg-blue-700 transition-all duration-200">
+                            Book Now
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

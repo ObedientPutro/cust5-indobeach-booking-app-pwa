@@ -74,7 +74,7 @@ defineOptions({
                 </p>
                 <div class="mt-10 flex items-center justify-center" data-aos="zoom-in">
                     <a
-                        :href="route('gazebo')"
+                        :href="route('gazebo.index')"
                         class="btn btn-info rounded-md px-6 text-sm font-black text-white shadow-sm">
                         Book Now
                     </a>

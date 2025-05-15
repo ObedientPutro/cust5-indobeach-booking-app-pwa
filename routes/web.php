@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Route;
 // Guest and costumer access
 Route::middleware('guest')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
-    Route::get('gazebo', [GazeboController::class, 'index'])->name('gazebo');
+    Route::get('gazebo', [GazeboController::class, 'index'])->name('gazebo.index');
     Route::get('gazebo/{post}', [GazeboController::class, 'detail'])->name('gazebo.detail');
 
     Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
@@ -55,8 +55,11 @@ Route::middleware('auth')->group(function () {
 
 // Customer access
 Route::middleware(['auth', 'customer'])->group(function () {
-    Route::get('booking/{post}', [CustomerBookingController::class, 'createBooking'])->name('booking.create');
-    Route::post('booking/{post}', [CustomerBookingController::class, 'storeBooking'])->name('booking.store');
+    Route::get('booking', [CustomerBookingController::class, 'bookingList'])->name('booking');
+    Route::get('booking/{booking}', [CustomerBookingController::class, 'bookingDetail'])->name('booking.detail');
+
+    Route::get('booking-post/{post}', [CustomerBookingController::class, 'createBooking'])->name('booking.create');
+    Route::post('booking-post/{post}', [CustomerBookingController::class, 'storeBooking'])->name('booking.store');
 });
 
 // Owner access

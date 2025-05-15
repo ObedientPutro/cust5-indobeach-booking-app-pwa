@@ -96,7 +96,7 @@ const navbarButtonTextClass = computed(() => {
                 </li>
                 <li>
                     <NavLink
-                        :href="route('gazebo')"
+                        :href="route('gazebo.index')"
                         :active="route().current('gazebo.*')"
                         :transparent="transparent"
                     >

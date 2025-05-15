@@ -45,16 +45,10 @@ defineProps({
             <!-- Row 3: Button -->
             <div class="mt-6 text-right">
                 <a
-                    href="#"
-                    class="cursor-pointer px-4 py-3 mr-2 text-sm font-medium bg-emerald-600 text-white rounded-md hover:bg-emerald-700"
-                >
-                    Book Now
-                </a>
-                <a
                     :href="route('gazebo.detail', post.id)"
                     class="cursor-pointer px-4 py-3 text-sm font-medium bg-blue-600 text-white rounded-md hover:bg-blue-700"
                 >
-                    Detail
+                    See More
                 </a>
             </div>
         </div>

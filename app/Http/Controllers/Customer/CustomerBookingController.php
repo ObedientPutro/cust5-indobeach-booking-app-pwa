@@ -56,4 +56,12 @@ class CustomerBookingController extends Controller
 
         return redirect()->route('gazebo.detail', $post->id)->with('success', 'Booking Success, Waiting for Approval');
     }
+
+    public function bookingList() {
+
+    }
+
+    public function bookingDetail(Booking $booking) {
+
+    }
 }
