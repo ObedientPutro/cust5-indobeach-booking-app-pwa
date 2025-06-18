@@ -6,6 +6,8 @@
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
+        <link rel="manifest" href="{{ asset('build/manifest.webmanifest') }}" />
+
         <link rel="icon" href="/storage/images/indobeach-logo-white.png">
 
         <!-- Fonts -->

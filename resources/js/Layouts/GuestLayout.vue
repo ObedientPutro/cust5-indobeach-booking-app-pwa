@@ -10,6 +10,18 @@ import ToastContainer from "@/Components/Toast/ToastContainer.vue";
 
 onMounted(() => {
     AOS.init({ duration: 1000, once: true });
+
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('Service Worker: Berhasil didaftarkan, scope:', registration.scope);
+                })
+                .catch(error => {
+                    console.log('Service Worker: Pendaftaran gagal:', error);
+                });
+        });
+    }
 });
 
 const navbarTransparent = ref(false);
