@@ -2,6 +2,9 @@
 import { ref, onMounted, onUnmounted, watch, computed } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import NavLink from "@/Components/NavLink.vue";
+import {
+    UserIcon,
+} from "@heroicons/vue/24/solid";
 
 const activeSection = ref(null);
 const isRouteActive = ref(null);
@@ -76,7 +79,7 @@ onUnmounted(() => {
             <div class="divider divider-vertical"></div>
             <li v-if="user" class="pt-2">
                 <div class="capitalize">
-                    <font-awesome-icon icon="fa-solid fa-user" />
+                    <UserIcon class="icon" />
                     {{ user.name }}
                 </div>
                 <ul class="p-2">
@@ -135,5 +138,7 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-
+.icon {
+    @apply size-5;
+}
 </style>

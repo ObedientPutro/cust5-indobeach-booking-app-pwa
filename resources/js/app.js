@@ -10,14 +10,7 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
 import '@splidejs/vue-splide/css';
 
-// Import Font Awesome core
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
-
-library.add(faUser);
 
 createInertiaApp({
     title: (title) => `${appName} - ${title}`,
@@ -35,7 +28,6 @@ createInertiaApp({
 
         app.component('Splide', Splide);
         app.component('SplideSlide', SplideSlide);
-        app.component('FontAwesomeIcon', FontAwesomeIcon);
 
         return app.use(plugin).use(ZiggyVue).mount(el);
     },

@@ -5,23 +5,23 @@ import Footer from "@/Components/Footer.vue";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
-import {onMounted, provide, ref} from "vue";
+import { onMounted, provide, ref } from "vue";
 import ToastContainer from "@/Components/Toast/ToastContainer.vue";
 
 onMounted(() => {
     AOS.init({ duration: 1000, once: true });
 
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js')
-                .then(registration => {
-                    console.log('Service Worker: Berhasil didaftarkan, scope:', registration.scope);
-                })
-                .catch(error => {
-                    console.log('Service Worker: Pendaftaran gagal:', error);
-                });
-        });
-    }
+    // if ('serviceWorker' in navigator) {
+    //     window.addEventListener('load', () => {
+    //         navigator.serviceWorker.register('/sw.js')
+    //             .then(registration => {
+    //                 console.log('Service Worker: Berhasil didaftarkan, scope:', registration.scope);
+    //             })
+    //             .catch(error => {
+    //                 console.log('Service Worker: Pendaftaran gagal:', error);
+    //             });
+    //     });
+    // }
 });
 
 const navbarTransparent = ref(false);
@@ -36,7 +36,7 @@ provide('toggleNavbar', toggleNavbar);
 <template>
     <div class="drawer">
         <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
-        <div class="drawer-content flex flex-col">
+        <div class="drawer-content flex flex-col overflow-x-hidden">
             <CustomerNavbar :transparent="navbarTransparent" />
 
             <ToastContainer :flash="$page.props.flash" />
