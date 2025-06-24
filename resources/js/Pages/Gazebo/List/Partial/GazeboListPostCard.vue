@@ -39,7 +39,7 @@ const formatRupiah = (amount) => {
                 </div>
                 <div class="text-right flex-shrink-0 pl-2">
                     <p class="text-lg font-semibold text-emerald-600">{{ formatRupiah(post.price) }}</p>
-                    <p class="text-xs text-gray-500">{{ post.quantity_left }} tersisa</p>
+                    <p class="text-xs text-gray-500">{{ post.quantity_left }} left</p>
                 </div>
             </div>
 
@@ -54,7 +54,7 @@ const formatRupiah = (amount) => {
             <!-- Baris 3: Tombol -->
             <div class="mt-6 flex flex-1 items-end justify-end">
                 <Link :href="route('gazebo.detail', post.id)" class="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700">
-                    Lihat Detail
+                    Select Post
                 </Link>
             </div>
         </div>

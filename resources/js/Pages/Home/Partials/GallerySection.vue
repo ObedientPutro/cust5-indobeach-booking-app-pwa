@@ -32,9 +32,9 @@ const images = [
 <template>
     <section id="gallery" class="py-20 px-6 bg-white">
         <div class="container mx-auto text-center">
-            <h2 class="text-4xl font-bold text-gray-800 mb-4" data-aos="fade-up">Momen Tak Terlupakan</h2>
+            <h2 class="text-4xl font-bold text-gray-800 mb-4" data-aos="fade-up">Unforgettable Moments</h2>
             <p class="text-gray-600 max-w-2xl mx-auto mb-12" data-aos="fade-up" data-aos-delay="100">
-                Lihat keceriaan para pengunjung yang telah menciptakan kenangan indah bersama kami di IndoBeach.
+                See the joy of our visitors who have created beautiful memories with us at IndoBeach.
             </p>
 
             <div data-aos="fade-up" data-aos-delay="200">
