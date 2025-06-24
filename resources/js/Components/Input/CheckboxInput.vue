@@ -31,6 +31,13 @@ const proxyChecked = computed({
         emit('update:checked', val);
     },
 });
+
+const isChecked = computed(() => {
+    if (Array.isArray(props.checked)) {
+        return props.checked.includes(props.id);
+    }
+    return props.checked;
+});
 </script>
 
 <template>
@@ -43,8 +50,8 @@ const proxyChecked = computed({
             :disabled="disabled"
         />
         <div :class="[
-                'px-4 py-2 rounded-md transition-all text-white font-black capitalize lg:hover:bg-blue-700',
-                proxyChecked ? 'bg-blue-500' : 'bg-gray-400'
+                'px-3 py-1 rounded-md transition-all text-white font-black capitalize lg:hover:bg-blue-700',
+                isChecked ? 'bg-blue-500' : 'bg-gray-400'
             ]">
             {{ name }}
         </div>

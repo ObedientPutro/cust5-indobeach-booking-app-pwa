@@ -30,7 +30,7 @@ if (workbox) {
 
     // STRATEGI 4: Network Only untuk Fitur yang Memerlukan Login
     workbox.routing.registerRoute(
-        ({ url }) => url.pathname.startsWith('/booking') || url.pathname.startsWith('/admin') || url.pathname.startsWith('/login') || url.pathname.startsWith('/register'),
+        ({ url }) => url.pathname.startsWith('/booking') || url.pathname.startsWith('/admin'),
         new workbox.strategies.NetworkOnly()
     );
 

@@ -28,7 +28,9 @@ const props = defineProps({
             <SwiperSlide v-for="(img, index) in images" :key="index">
                 <img
                     :src="`/storage/${img.image_path}`"
-                    class="aspect-2 w-full bg-gray-200 object-cover group-hover:opacity-75" />
+                    class="aspect-1 bg-gray-200 object-cover"
+                    :alt="'image ' + index"
+                />
             </SwiperSlide>
         </Swiper>
     </div>
