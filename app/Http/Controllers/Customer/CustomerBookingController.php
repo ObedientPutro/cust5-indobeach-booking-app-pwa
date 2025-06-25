@@ -9,6 +9,7 @@ use App\Http\Requests\Booking\UploadPaymentBookingRequest;
 use App\Models\Booking;
 use App\Models\Post;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -16,16 +17,40 @@ class CustomerBookingController extends Controller
 {
     private string $image_path = 'images/payment';
 
-    public function bookingList() {
-        $bookings = Booking::where('user_id', auth()->user()->id)->with('post')->latest('created_at')->paginate(10);
+    public function bookingList(Request $request) {
+        // 1. Validasi input dari request (opsional, tapi praktik yang baik)
+        $request->validate([
+            'search' => 'nullable|string|max:100',
+        ]);
 
+        // 2. Ambil nilai pencarian dari request
+        $searchFilter = $request->input('search');
+
+        // 3. Bangun kueri dasar untuk booking milik user yang sedang login
+        $bookingsQuery = Booking::where('user_id', auth()->id())
+            ->with(['post.images']); // Load relasi post beserta gambarnya untuk ditampilkan di kartu
+
+        // 4. Terapkan filter pencarian jika ada
+        if ($searchFilter) {
+            // Gunakan whereHas untuk memfilter berdasarkan relasi 'post'
+            $bookingsQuery->whereHas('post', function ($query) use ($searchFilter) {
+                $query->where('title', 'like', '%' . $searchFilter . '%');
+            });
+        }
+
+        // 5. Ambil hasil dengan urutan terbaru dan paginasi
+        // withQueryString() penting agar filter pencarian tetap ada saat pindah halaman
+        $bookings = $bookingsQuery->latest('created_at')->paginate(10)->withQueryString();
+
+        // 6. Kirim data ke frontend
         return Inertia::render('Customer/Booking/BookingList', [
             'bookings' => $bookings,
+            'filters' => ['search' => $searchFilter], // Kirim kembali filter yang aktif
         ]);
     }
 
     public function bookingDetail(Booking $booking) {
-        $booking->load('post', 'user');
+        $booking->load('post.images', 'post.category', 'user');
 
         if (auth()->user() != $booking->user) {
             return back();
