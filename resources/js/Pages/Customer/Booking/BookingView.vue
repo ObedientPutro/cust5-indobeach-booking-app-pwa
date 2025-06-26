@@ -4,6 +4,10 @@ import { Head, Link } from '@inertiajs/vue3';
 import dayjs from "dayjs";
 
 const props = defineProps({
+    statusOptions: {
+        type: Object,
+        required: true,
+    },
     booking: {
         type: Object,
         required: true,
@@ -31,28 +35,6 @@ const formatRupiah = (amount) => {
     }).format(amount);
 };
 
-// Logika untuk menentukan warna dan teks status berdasarkan Enum
-const statusInfo = computed(() => {
-    switch (props.booking.status) {
-        case 'confirmed':
-        case 'completed':
-            return { text: 'Confirmed', class: 'bg-green-100 text-green-700' };
-        case 'payment':
-            return { text: 'Waiting for Payment', class: 'bg-blue-100 text-blue-700' };
-        case 'waiting payment confirmation':
-            return { text: 'Waiting Payment Confirmation', class: 'bg-yellow-100 text-yellow-800' };
-        case 'waiting approval':
-            return { text: 'Waiting for Approval', class: 'bg-yellow-100 text-yellow-800' };
-        case 'rejected':
-            return { text: 'Rejected', class: 'bg-red-100 text-red-700' };
-        case 'cancelled':
-            return { text: 'Cancelled', class: 'bg-gray-100 text-gray-700' };
-        default:
-            return { text: props.booking.status, class: 'bg-gray-100 text-gray-800' };
-    }
-});
-
-// Menghitung durasi pemesanan
 const bookingDuration = computed(() => {
     const start = dayjs(props.booking.start_date);
     const end = dayjs(props.booking.end_date);
@@ -93,8 +75,8 @@ const printPage = () => {
                             <p class="mt-1 text-sm text-gray-500">Booking ID #INDB-{{ booking.id }}</p>
                         </div>
                         <div class="text-left sm:text-right">
-                            <span :class="['inline-flex items-center rounded-full px-3 py-1 text-sm font-medium capitalize', statusInfo.class]">
-                                {{ statusInfo.text }}
+                            <span :class="['inline-flex items-center rounded-full px-3 py-1 text-sm font-medium capitalize', booking.status_info.color_class]">
+                                {{ booking.status_info.label }}
                             </span>
                             <p class="mt-1 text-sm text-gray-500">Booking Date: {{ formatSimpleDate(booking.created_at) }}</p>
                         </div>

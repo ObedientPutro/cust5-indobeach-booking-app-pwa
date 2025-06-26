@@ -37,7 +37,7 @@ class GazeboController extends Controller
             }, '>=', count($amenityFilters));
         }
 
-        $posts = $postsQuery->latest('created_at')->paginate(9)->withQueryString();
+        $posts = $postsQuery->latest('created_at')->paginate(6)->withQueryString();
 
         return Inertia::render('Gazebo/List/GazeboList', [
             'posts' => $posts,

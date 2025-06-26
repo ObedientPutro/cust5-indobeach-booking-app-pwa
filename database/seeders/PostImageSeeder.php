@@ -15,20 +15,34 @@ class PostImageSeeder extends Seeder
     public function run(): void
     {
         PostImage::insert([
-            [ 'post_id' => '1', 'image_path' => 'images/posts/1-1.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
-            [ 'post_id' => '1', 'image_path' => 'images/posts/1-2.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
-            [ 'post_id' => '1', 'image_path' => 'images/posts/1-3.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
-            [ 'post_id' => '1', 'image_path' => 'images/posts/1-4.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
+            [ 'post_id' => '1', 'image_path' => 'images/posts/gazebo_type_1_1.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
+            [ 'post_id' => '1', 'image_path' => 'images/posts/gazebo_type_1_2.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
+            [ 'post_id' => '1', 'image_path' => 'images/posts/gazebo_type_1_3.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
+            [ 'post_id' => '1', 'image_path' => 'images/posts/gazebo_type_1_4.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
 
-            [ 'post_id' => '2', 'image_path' => 'images/posts/2-1.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
-            [ 'post_id' => '2', 'image_path' => 'images/posts/2-2.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
-            [ 'post_id' => '2', 'image_path' => 'images/posts/2-3.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
-            [ 'post_id' => '2', 'image_path' => 'images/posts/2-4.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
+            [ 'post_id' => '2', 'image_path' => 'images/posts/gazebo_type_2_1.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
+            [ 'post_id' => '2', 'image_path' => 'images/posts/gazebo_type_2_2.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
+            [ 'post_id' => '2', 'image_path' => 'images/posts/gazebo_type_2_3.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
+            [ 'post_id' => '2', 'image_path' => 'images/posts/gazebo_type_2_4.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
+            [ 'post_id' => '2', 'image_path' => 'images/posts/gazebo_type_2_5.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
 
-            [ 'post_id' => '3', 'image_path' => 'images/posts/3-1.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
-            [ 'post_id' => '3', 'image_path' => 'images/posts/3-2.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
-            [ 'post_id' => '3', 'image_path' => 'images/posts/3-3.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
-            [ 'post_id' => '3', 'image_path' => 'images/posts/3-4.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
+            [ 'post_id' => '3', 'image_path' => 'images/posts/gazebo_type_3_1.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
+            [ 'post_id' => '3', 'image_path' => 'images/posts/gazebo_type_3_2.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
+            [ 'post_id' => '3', 'image_path' => 'images/posts/gazebo_type_3_3.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
+
+            [ 'post_id' => '4', 'image_path' => 'images/posts/cottage_type_1_1.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
+            [ 'post_id' => '4', 'image_path' => 'images/posts/cottage_type_1_2.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
+            [ 'post_id' => '4', 'image_path' => 'images/posts/cottage_type_1_3.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
+            [ 'post_id' => '4', 'image_path' => 'images/posts/cottage_type_1_4.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
+            [ 'post_id' => '4', 'image_path' => 'images/posts/cottage_type_1_5.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
+
+            [ 'post_id' => '5', 'image_path' => 'images/posts/camping_type_1_1.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
+            [ 'post_id' => '5', 'image_path' => 'images/posts/camping_type_1_2.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
+            [ 'post_id' => '5', 'image_path' => 'images/posts/camping_type_1_3.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
+            [ 'post_id' => '5', 'image_path' => 'images/posts/camping_type_1_4.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
+            [ 'post_id' => '5', 'image_path' => 'images/posts/camping_type_1_5.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
+            [ 'post_id' => '5', 'image_path' => 'images/posts/camping_type_1_6.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
+            [ 'post_id' => '5', 'image_path' => 'images/posts/camping_type_1_7.jpg', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now() ],
         ]);
     }
 }

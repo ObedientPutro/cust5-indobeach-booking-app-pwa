@@ -18,34 +18,26 @@ class CustomerBookingController extends Controller
     private string $image_path = 'images/payment';
 
     public function bookingList(Request $request) {
-        // 1. Validasi input dari request (opsional, tapi praktik yang baik)
         $request->validate([
             'search' => 'nullable|string|max:100',
         ]);
 
-        // 2. Ambil nilai pencarian dari request
         $searchFilter = $request->input('search');
 
-        // 3. Bangun kueri dasar untuk booking milik user yang sedang login
         $bookingsQuery = Booking::where('user_id', auth()->id())
-            ->with(['post.images']); // Load relasi post beserta gambarnya untuk ditampilkan di kartu
+            ->with(['post.images']);
 
-        // 4. Terapkan filter pencarian jika ada
         if ($searchFilter) {
-            // Gunakan whereHas untuk memfilter berdasarkan relasi 'post'
             $bookingsQuery->whereHas('post', function ($query) use ($searchFilter) {
                 $query->where('title', 'like', '%' . $searchFilter . '%');
             });
         }
 
-        // 5. Ambil hasil dengan urutan terbaru dan paginasi
-        // withQueryString() penting agar filter pencarian tetap ada saat pindah halaman
         $bookings = $bookingsQuery->latest('created_at')->paginate(10)->withQueryString();
 
-        // 6. Kirim data ke frontend
         return Inertia::render('Customer/Booking/BookingList', [
             'bookings' => $bookings,
-            'filters' => ['search' => $searchFilter], // Kirim kembali filter yang aktif
+            'filters' => ['search' => $searchFilter],
         ]);
     }
 
@@ -59,6 +51,7 @@ class CustomerBookingController extends Controller
         $isUploadPayment = $booking->status == BookingStatus::Payment;
 
         return Inertia::render('Customer/Booking/BookingView', [
+            'statusOptions' => BookingStatus::toArray(),
             'booking' => $booking,
             'isUploadPayment' => $isUploadPayment,
         ]);

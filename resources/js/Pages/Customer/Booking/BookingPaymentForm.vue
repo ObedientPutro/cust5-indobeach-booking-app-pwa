@@ -55,7 +55,7 @@ const submitForm = () => {
 
                     <!-- Upload Box (only visible if checkbox is checked) -->
                     <div class="col-span-full">
-                        <InputLabel for="image_path" value="Upload Icon" />
+                        <InputLabel for="image_path" value="Upload Payment Proof Image" />
 
                         <FileInput
                             id="image_path"

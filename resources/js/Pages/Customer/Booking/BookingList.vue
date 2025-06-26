@@ -5,7 +5,6 @@ import { defineOptions, inject } from "vue";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import { debounce } from 'lodash';
 
-// Import komponen-komponen yang diperlukan
 import BookingHistoryCard from './Partials/BookingHistoryCard.vue';
 import BookingHistoryPagination from "@/Pages/Customer/Booking/Partials/BookingHistoryPagination.vue";
 import BookingHistorySearchForm from "@/Pages/Customer/Booking/Partials/BookingHistorySearchForm.vue";
@@ -22,10 +21,8 @@ const props = defineProps({
     filters: Object,
 });
 
-// State untuk fungsionalitas pencarian
 const search = ref(props.filters.search);
 
-// Fungsi untuk mengambil data baru saat pencarian berubah
 watch(search, debounce((value) => {
     router.get(route('booking'), { search: value }, {
         preserveState: true,

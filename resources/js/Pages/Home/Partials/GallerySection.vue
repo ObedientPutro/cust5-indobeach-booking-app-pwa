@@ -1,18 +1,13 @@
 <script setup>
-// Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Autoplay, Pagination } from 'swiper/modules';
 
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 
-// import required modules
-import { Autoplay, Pagination } from 'swiper/modules';
-
 const modules = [Autoplay, Pagination];
 
-// Daftar gambar dari kode asli Anda
 const images = [
     '/storage/images/gallery/1.jpeg',
     '/storage/images/gallery/2.jpeg',
@@ -26,6 +21,26 @@ const images = [
     '/storage/images/gallery/10.jpeg',
     '/storage/images/gallery/11.jpeg',
     '/storage/images/gallery/12.jpeg',
+    '/storage/images/gallery/13.jpg',
+    '/storage/images/gallery/14.jpg',
+    '/storage/images/gallery/15.jpg',
+    '/storage/images/gallery/16.jpg',
+    '/storage/images/gallery/17.jpg',
+    '/storage/images/gallery/18.jpg',
+    '/storage/images/gallery/19.jpg',
+    '/storage/images/gallery/20.jpg',
+    '/storage/images/gallery/21.jpg',
+    '/storage/images/gallery/22.jpg',
+    '/storage/images/gallery/23.jpg',
+    '/storage/images/gallery/24.jpg',
+    '/storage/images/gallery/25.jpg',
+    '/storage/images/gallery/26.jpg',
+    '/storage/images/gallery/27.jpg',
+    '/storage/images/gallery/28.jpg',
+    '/storage/images/gallery/29.jpg',
+    '/storage/images/gallery/30.jpg',
+    '/storage/images/gallery/31.jpg',
+    '/storage/images/gallery/32.jpg',
 ];
 </script>
 
