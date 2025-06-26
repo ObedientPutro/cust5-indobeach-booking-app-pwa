@@ -6,6 +6,7 @@ use App\Enums\BookingStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
@@ -27,6 +28,7 @@ class DashboardController extends Controller
             ->paginate(10);
 
         $reserved_bookings = Booking::where('status', BookingStatus::Confirmed)
+            ->whereDate('end_date', '>', Carbon::today())
             ->latest('start_date')
             ->with(['post', 'user'])
             ->paginate(10);

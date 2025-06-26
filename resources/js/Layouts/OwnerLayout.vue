@@ -23,7 +23,6 @@ import Footer from "@/Components/Footer.vue";
                     </div>
                 </div>
             </main>
-            <Footer />
         </div>
 
         <div class="drawer-side z-20">

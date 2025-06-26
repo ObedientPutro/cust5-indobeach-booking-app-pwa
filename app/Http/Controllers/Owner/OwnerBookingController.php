@@ -27,7 +27,7 @@ class OwnerBookingController extends Controller
      */
     public function show(Booking $booking)
     {
-        $booking->load('post', 'user');
+        $booking->load('post.images', 'post.category', 'user');
 
         return Inertia::render('Owner/Booking/BookingView', [
             'booking' => $booking,
