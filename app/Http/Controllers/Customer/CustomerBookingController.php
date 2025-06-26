@@ -8,8 +8,12 @@ use App\Http\Requests\Booking\StoreBookingRequest;
 use App\Http\Requests\Booking\UploadPaymentBookingRequest;
 use App\Models\Booking;
 use App\Models\Post;
+use App\Models\User;
+use App\Notifications\BookingStatusUpdated;
+use App\Notifications\NewBookingRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -90,7 +94,7 @@ class CustomerBookingController extends Controller
 
         $totalPrice = $days * $post->price;
 
-        Booking::create([
+        $newBooking = Booking::create([
             'post_id' => $post->id,
             'user_id' => auth()->user()->id,
             'start_date' => $start,
@@ -98,6 +102,11 @@ class CustomerBookingController extends Controller
             'total_price' => $totalPrice,
             'status' => BookingStatus::WaitingApproval,
         ]);
+
+        $owner = User::where('role', 'owner')->first();
+        if ($owner) {
+            Notification::send($owner, new NewBookingRequest($newBooking));
+        }
 
         return redirect()->route('gazebo.detail', $post->id)->with('success', 'Booking Success, Waiting for Approval');
     }
@@ -131,6 +140,11 @@ class CustomerBookingController extends Controller
             'payment_image_path' => $imageLinkPath,
             'status' => BookingStatus::WaitingPaymentConfirmation,
         ]);
+
+        $owner = User::where('role', 'owner')->first();
+        if ($owner) {
+            Notification::send($owner, new BookingStatusUpdated($booking));
+        }
 
         return redirect()->route('booking.detail', $booking->id)->with('success', 'Payment Uploaded Successfully');
     }

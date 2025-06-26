@@ -1,6 +1,9 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.4.1/workbox-sw.js');
 
 if (workbox) {
+    // ======================================================
+    // BAGIAN CACHING DENGAN WORKBOX
+    // ======================================================
     console.log(`Workbox berhasil dimuat!`);
 
     // STRATEGI 1: PRECACHE (Cache First untuk Aset Inti Aplikasi)
@@ -40,3 +43,58 @@ if (workbox) {
 } else {
     console.log(`Workbox gagal dimuat.`);
 }
+
+// ======================================================
+// EVENT LISTENER UNTUK PUSH NOTIFICATION
+// ======================================================
+
+// Listener saat ada push notification masuk dari server
+self.addEventListener('push', function (event) {
+    if (!(self.Notification && self.Notification.permission === 'granted')) {
+        return;
+    }
+
+    const data = event.data?.json() ?? {};
+    const title = data.title || 'IndoBeach Resort';
+    const message = data.body || 'Anda memiliki pesan baru.';
+    const icon = data.icon || '/images/icons/icon-192x192.png';
+    const notificationData = data.data || {};
+
+    const options = {
+        body: message,
+        icon: icon,
+        badge: '/images/icons/icon-96x96.png',
+        data: notificationData,
+    };
+
+    event.waitUntil(
+        self.registration.showNotification(title, options)
+    );
+});
+
+// Listener saat pengguna mengklik notifikasi
+self.addEventListener('notificationclick', function(event) {
+    event.notification.close();
+    const urlToOpen = event.notification.data?.url;
+
+    if (urlToOpen) {
+        event.waitUntil(
+            clients.matchAll({ type: 'window', includeUncontrolled: true })
+                .then(windowClients => {
+                    let clientIsFocused = false;
+                    for (let i = 0; i < windowClients.length; i++) {
+                        const client = windowClients[i];
+                        if (client.url === urlToOpen && 'focus' in client) {
+                            client.focus();
+                            clientIsFocused = true;
+                            break;
+                        }
+                    }
+                    if (!clientIsFocused && clients.openWindow) {
+                        return clients.openWindow(urlToOpen);
+                    }
+                })
+        );
+    }
+});
+

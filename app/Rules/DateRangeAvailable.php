@@ -61,7 +61,6 @@ class DateRangeAvailable implements DataAwareRule, InvokableRule
                 BookingStatus::Completed,
                 BookingStatus::WaitingPaymentConfirmation,
                 BookingStatus::Payment,
-                BookingStatus::WaitingApproval,
             ])
             ->where(function ($query) use ($startDate, $endDate) {
                 $query->where(function ($q) use ($startDate, $endDate) {

@@ -2,26 +2,19 @@
 import CustomerNavbar from "@/Components/Navigation/CustomerNavbar.vue";
 import CustomerDrawer from "@/Components/Drawer/CustomerDrawer.vue";
 import Footer from "@/Components/Footer.vue";
+import ToastContainer from "@/Components/Toast/ToastContainer.vue";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { onMounted, provide, ref } from "vue";
-import ToastContainer from "@/Components/Toast/ToastContainer.vue";
+import { computed, onMounted, provide, ref } from "vue";
+import { usePushNotifications } from "@/Composables/usePushNotifications";
+
+usePushNotifications();
+
+const user = computed(() => page.props.auth.user);
 
 onMounted(() => {
     AOS.init({ duration: 1000, once: true });
-
-    // if ('serviceWorker' in navigator) {
-    //     window.addEventListener('load', () => {
-    //         navigator.serviceWorker.register('/sw.js')
-    //             .then(registration => {
-    //                 console.log('Service Worker: Berhasil didaftarkan, scope:', registration.scope);
-    //             })
-    //             .catch(error => {
-    //                 console.log('Service Worker: Pendaftaran gagal:', error);
-    //             });
-    //     });
-    // }
 });
 
 const navbarTransparent = ref(false);

@@ -15,6 +15,7 @@ use App\Http\Controllers\Owner\DashboardController;
 use App\Http\Controllers\Owner\OwnerBookingController;
 use App\Http\Controllers\Owner\PostController;
 use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\PushSubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,6 +52,8 @@ Route::middleware('auth')->group(function () {
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+    Route::post('push-subscriptions', [PushSubscriptionController::class, 'store'])->name('push.store');
 });
 
 // Customer access
@@ -103,5 +106,4 @@ Route::middleware(['auth', 'owner'])->group(function () {
         'update'  => 'admin.amenity.update',
         'destroy' => 'admin.amenity.delete',
     ]);
-
 });

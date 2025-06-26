@@ -2,7 +2,9 @@
 import OwnerHeader from "@/Components/Header/OwnerHeader.vue";
 import OwnerDrawer from "@/Components/Drawer/OwnerDrawer.vue";
 import ToastContainer from "@/Components/Toast/ToastContainer.vue";
-import Footer from "@/Components/Footer.vue";
+import { usePushNotifications } from "@/Composables/usePushNotifications";
+
+usePushNotifications();
 </script>
 
 <template>

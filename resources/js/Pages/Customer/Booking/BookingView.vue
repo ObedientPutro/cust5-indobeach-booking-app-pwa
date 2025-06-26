@@ -146,7 +146,7 @@ const printPage = () => {
 
                     <div class="mt-8 border-t pt-6">
                         <h3 class="text-sm font-semibold uppercase text-gray-500 mb-3">Payment Proof</h3>
-                        <div v-if="booking.payment_image_path">
+                        <div v-if="booking.payment_image_path && booking.status !== 'payment'">
                             <img :src="`/storage/${booking.payment_image_path}`" alt="Payment Proof" class="max-w-xs w-full rounded-lg border">
                         </div>
                         <div v-else class="text-center p-6 border-2 border-dashed rounded-lg">

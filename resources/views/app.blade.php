@@ -20,6 +20,10 @@
         @inertiaHead
     </head>
     <body class="font-sans antialiased">
+        <div id="app"
+             data-page="{{ json_encode($page) }}"
+             data-vapid-public-key="{{ config('webpush.vapid.public_key') }}">
+        </div>
         @inertia
     </body>
 </html>
