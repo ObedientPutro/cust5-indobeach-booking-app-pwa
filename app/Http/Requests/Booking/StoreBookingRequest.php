@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Booking;
 
+use App\Rules\DateRangeAvailable;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreBookingRequest extends FormRequest
@@ -22,8 +23,13 @@ class StoreBookingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'start_date' => 'required|date|after:today',
-            'end_date' => 'required|date|after_or_equal:start_date',
+            'start_date' => 'required|date|after_or_equal:today',
+            'end_date' => [
+                'required',
+                'date',
+                'after_or_equal:start_date',
+                new DateRangeAvailable($this->post),
+            ],
         ];
     }
 }

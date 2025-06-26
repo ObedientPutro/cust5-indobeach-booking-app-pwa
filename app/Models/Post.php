@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Enums\BookingStatus;
 use App\Enums\PostStatus;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,12 +21,15 @@ class Post extends Model
         'description',
         'price',
         'quantity',
-        'quantity_left',
         'status',
     ];
 
     protected $casts = [
         'status' => PostStatus::class,
+    ];
+
+    protected $appends = [
+        'quantity_left'
     ];
 
     public function category()
@@ -45,5 +51,30 @@ class Post extends Model
     public function bookings()
     {
         return $this->hasMany(Booking::class, 'post_id');
+    }
+
+    /**
+     * Accessor untuk menghitung sisa kuantitas yang tersedia HARI INI.
+     */
+    protected function quantityLeft(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                $today = Carbon::today();
+
+                $activeBookingsCount = $this->bookings()
+                    ->whereIn('status', [
+                        BookingStatus::Confirmed,
+                        BookingStatus::Completed,
+                        BookingStatus::WaitingPaymentConfirmation,
+                        BookingStatus::Payment,
+                    ])
+                    ->where('start_date', '<=', $today)
+                    ->where('end_date', '>=', $today)
+                    ->count();
+
+                return $this->quantity - $activeBookingsCount;
+            }
+        );
     }
 }

@@ -108,7 +108,8 @@ function openWhatsApp() {
                                     <p class="text-3xl font-bold text-gray-900">{{ formatRupiah(post.price) }}</p>
                                 </div>
                                 <div class="text-right">
-                                    <p class="text-sm font-medium text-green-600">{{ post.quantity_left }} units available</p>
+                                    <p v-if="post.quantity_left > 0" class="text-sm font-medium text-green-600">{{ post.quantity_left }} units available</p>
+                                    <p v-else class="text-sm font-medium text-red-600">No units available for today</p>
                                 </div>
                             </div>
                             <div class="mt-6">
@@ -120,7 +121,7 @@ function openWhatsApp() {
                                 </div>
                                 <div v-else>
                                     <Link :href="route('booking.create', post.id)" class="flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-8 py-3 text-base font-medium text-white hover:bg-blue-700">
-                                        Book Now
+                                        {{ post.quantity_left > 0 ? 'Book Now' : 'Book for Another Date'}}
                                     </Link>
                                 </div>
                                 <button @click="openWhatsApp" class="mt-3 flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-8 py-3 text-base font-medium text-gray-700 hover:bg-gray-50">

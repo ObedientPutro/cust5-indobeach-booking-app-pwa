@@ -20,7 +20,6 @@ class PostService
             'description' => $request->description,
             'price' => $request->price,
             'quantity' => $request->quantity,
-            'quantity_left' => $request->quantity,
             'status' => $request->status,
         ]);
 
@@ -39,15 +38,12 @@ class PostService
     {
         $post->load(['category', 'images', 'amenities']);
 
-        $quantity_left = (($request->quantity - $post->quantity + $post->quantity_left) > -1) ? $request->quantity - $post->quantity + $post->quantity_left : 0;
-
         $post->update([
             'category_id' => $request->category_id,
             'title' => strtolower($request->title),
             'description' => $request->description,
             'price' => $request->price,
             'quantity' => $request->quantity,
-            'quantity_left' => $quantity_left,
             'status' => $request->status,
         ]);
 

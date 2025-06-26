@@ -22,7 +22,6 @@ return new class extends Migration
             $table->text('description');
             $table->unsignedBigInteger('price');
             $table->integer('quantity');
-            $table->integer('quantity_left');
             $table->string('status');
             $table->timestamps();
         });

@@ -39,7 +39,7 @@ const formatRupiah = (amount) => {
                 </div>
                 <div class="text-right flex-shrink-0 pl-2">
                     <p class="text-lg font-semibold text-emerald-600">{{ formatRupiah(post.price) }}</p>
-                    <p class="text-xs text-gray-500">{{ post.quantity_left }} left</p>
+                    <p :class="['text-xs', post.quantity_left === 0 ? 'text-red-500' : 'text-gray-500']">{{ post.quantity_left }} left today</p>
                 </div>
             </div>
 

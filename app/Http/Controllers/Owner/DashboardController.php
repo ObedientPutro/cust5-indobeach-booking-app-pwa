@@ -28,7 +28,7 @@ class DashboardController extends Controller
             ->paginate(10);
 
         $reserved_bookings = Booking::where('status', BookingStatus::Confirmed)
-            ->whereDate('end_date', '>', Carbon::today())
+            ->whereDate('end_date', '>=', Carbon::today())
             ->latest('start_date')
             ->with(['post', 'user'])
             ->paginate(10);
